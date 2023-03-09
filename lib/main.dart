@@ -39,9 +39,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
+          children: <Widget>[
+            const Text(
               'The person who has make this change was Samuel',
+            ),
+            Image.network(
+              'https://picsum.photos/400/400',
+              width: 300,
+              height: 300,
+            ),
+            const Text(
+              'Random Image from the internet',
             ),
           ],
         ),
