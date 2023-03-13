@@ -30,6 +30,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  bool _isHovering = false;
+
+ void _toggleHover(bool isHovering) {
+    setState(() {
+      _isHovering = isHovering;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +58,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const Text(
               'Random Image from the internet',
+            ),
+            MouseRegion(
+              onEnter: (_) => _toggleHover(true),
+              onExit: (_) => _toggleHover(false),
+              child: Text(
+                'Hola Mundo, from Yorman with hover :)',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: _isHovering ? Colors.red : Colors.black,
+                ),
+              ),
             ),
           ],
         ),
