@@ -30,14 +30,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   bool _isHovering = false;
 
- void _toggleHover(bool isHovering) {
+  void _toggleHover(bool isHovering) {
     setState(() {
       _isHovering = isHovering;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'The person who has make this change was Samuel',
             ),
+
             Image.network(
               'https://picsum.photos/400/400',
               width: 300,
@@ -69,6 +70,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.bold,
                   color: _isHovering ? Colors.red : Colors.black,
                 ),
+              ),
+            ),
+            const SizedBox(height: 20), // agregar un espacio en blanco
+            const Text(
+              'Hello World, from Camila', // agregar el nuevo widget de texto
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
               ),
             ),
           ],
