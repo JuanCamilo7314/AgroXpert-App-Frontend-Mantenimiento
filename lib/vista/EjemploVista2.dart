@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
+import 'DetallesEstimacion.dart';
 
 List<Map<String, dynamic>> datos = [
   {
@@ -13,6 +14,15 @@ List<Map<String, dynamic>> datos = [
     'estimacionFinal': 'Estimacion final 2',
   },
 ];
+
+// Función que abre la pantalla de detalles
+void _verDetalles(BuildContext context, String idEstimacion) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+        builder: (context) => DetallesEstimacion(id: idEstimacion)),
+  );
+}
 
 class EjemploVista2 extends StatelessWidget {
   const EjemploVista2({Key? key}) : super(key: key);
@@ -92,7 +102,10 @@ class EjemploVista2 extends StatelessWidget {
                     TableCell(
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text(dato['estimaciones']),
+                        child: GestureDetector(
+                          onTap: () => _verDetalles(context, 'Estimacion 1'),
+                          child: Text(dato['estimaciones']),
+                        ),
                       ),
                     ),
                     TableCell(
