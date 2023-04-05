@@ -4,6 +4,86 @@ import 'DetallesEstimacion.dart';
 
 List<Map<String, dynamic>> datos = [
   {
+    'idCosecha': 1,
+    'tipoCosecha': 'Cosecha 1',
+    'fechaInicio': '2022-01-01',
+    'fechaFin': '2022-01-15',
+    'estimaciones': [
+      {
+        'idEstimacion': 1,
+        'fecha': '2022-01-03',
+        'arbolesEvaluados': [
+          {'numFrutas': 20, 'numQuartiles': 5},
+          {'numFrutas': 15, 'numQuartiles': 3},
+          {'numFrutas': 25, 'numQuartiles': 6},
+        ],
+        'numArboles': 50,
+        'totalFrutasEstimadas': 1500,
+        'promedioFrutas': 30,
+        'produccionEstimada': 45000,
+      },
+      {
+        'idEstimacion': 2,
+        'fecha': '2022-01-08',
+        'arbolesEvaluados': [
+          {'numFrutas': 18, 'numQuartiles': 4},
+          {'numFrutas': 22, 'numQuartiles': 5},
+          {'numFrutas': 20, 'numQuartiles': 6},
+        ],
+        'numArboles': 60,
+        'totalFrutasEstimadas': 1800,
+        'promedioFrutas': 30,
+        'produccionEstimada': 54000,
+      },
+    ],
+  },
+  {
+    'idCosecha': 2,
+    'tipoCosecha': 'Cosecha 2',
+    'fechaInicio': '2022-02-01',
+    'fechaFin': '2022-02-15',
+    'estimaciones': [
+      {
+        'idEstimacion': 3,
+        'fecha': '2022-02-03',
+        'arbolesEvaluados': [
+          {'numFrutas': 16, 'numQuartiles': 4},
+          {'numFrutas': 20, 'numQuartiles': 5},
+          {'numFrutas': 18, 'numQuartiles': 6},
+        ],
+        'numArboles': 50,
+        'totalFrutasEstimadas': 1500,
+        'promedioFrutas': 30,
+        'produccionEstimada': 45000,
+      },
+      {
+        'idEstimacion': 4,
+        'fecha': '2022-02-08',
+        'arbolesEvaluados': [
+          {'numFrutas': 22, 'numQuartiles': 5},
+          {'numFrutas': 18, 'numQuartiles': 4},
+          {'numFrutas': 24, 'numQuartiles': 6},
+        ],
+        'numArboles': 60,
+        'totalFrutasEstimadas': 1800,
+        'promedioFrutas': 30,
+        'produccionEstimada': 54000,
+      },
+    ],
+  },
+];
+
+void _verDetalles(BuildContext context, List<String> estimaciones) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+        builder: (context) => DetallesEstimacion(estimaciones: estimaciones)),
+  );
+}
+
+/*
+List<Map<String, dynamic>> datos = [
+  {
     'cosecha': 'Cosecha 1',
     'estimaciones': 'Estimacion 1, Estimacion 2',
     'estimacionFinal': 'Estimacion final 1',
@@ -15,6 +95,7 @@ List<Map<String, dynamic>> datos = [
   },
 ];
 
+
 void _verDetalles(BuildContext context, String estimacion) {
   Navigator.push(
     context,
@@ -22,7 +103,7 @@ void _verDetalles(BuildContext context, String estimacion) {
   );
 }
 
-/*
+
 // Función que abre la pantalla de detalles
 void _verDetalles(BuildContext context, String idEstimacion) {
   Navigator.push(
@@ -107,15 +188,15 @@ class EjemploVista2 extends StatelessWidget {
                     TableCell(
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text(dato['cosecha']),
+                        child: Text(dato['idCosecha']),
                       ),
                     ),
                     TableCell(
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: GestureDetector(
-                          onTap: () =>
-                              _verDetalles(context, dato['estimaciones']),
+                          onTap: () => _verDetalles(
+                              context, dato['estimaciones'].split(', ')),
                           child: Text(dato['estimaciones']),
                         ),
                       ),
