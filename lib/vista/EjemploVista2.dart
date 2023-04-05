@@ -15,6 +15,14 @@ List<Map<String, dynamic>> datos = [
   },
 ];
 
+void _verDetalles(BuildContext context, String estimacion) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => DetallesEstimacion(id: estimacion)),
+  );
+}
+
+/*
 // Función que abre la pantalla de detalles
 void _verDetalles(BuildContext context, String idEstimacion) {
   Navigator.push(
@@ -23,6 +31,9 @@ void _verDetalles(BuildContext context, String idEstimacion) {
         builder: (context) => DetallesEstimacion(id: idEstimacion)),
   );
 }
+
+
+*/
 
 class EjemploVista2 extends StatelessWidget {
   const EjemploVista2({Key? key}) : super(key: key);
@@ -103,7 +114,8 @@ class EjemploVista2 extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: GestureDetector(
-                          onTap: () => _verDetalles(context, 'Estimacion 1'),
+                          onTap: () =>
+                              _verDetalles(context, dato['estimaciones']),
                           child: Text(dato['estimaciones']),
                         ),
                       ),

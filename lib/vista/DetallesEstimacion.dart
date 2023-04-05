@@ -16,7 +16,7 @@ class DetallesEstimacion extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Aquí podrías mostrar los detalles de la estimación con el id indicado
+            // Aquí podrías mostrar los detalles de la estimación con el estimacion indicado
             Text(
               'Detalles de la estimación $id',
               style: TextStyle(
