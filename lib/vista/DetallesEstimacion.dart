@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 
 class DetallesEstimacion extends StatelessWidget {
-  //final String id;
-  final List<String> estimaciones;
+  final String id;
 
-  const DetallesEstimacion({Key? key, required this.estimaciones})
-      : super(key: key);
+  const DetallesEstimacion({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalles de la cosecha y sus estimaciones'
-            'Detalles de la cosecha y sus estimaciones'),
+        title: Text('Detalles de la estimación $id'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -21,7 +18,7 @@ class DetallesEstimacion extends StatelessWidget {
           children: [
             // Aquí podrías mostrar los detalles de la estimación con el estimacion indicado
             Text(
-              'Estimación',
+              'Detalles de la estimación $id',
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
