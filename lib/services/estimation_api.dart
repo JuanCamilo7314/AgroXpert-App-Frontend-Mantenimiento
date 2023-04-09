@@ -1,21 +1,16 @@
-import 'package:agroxpert/models/farm_lot_model.dart';
+import 'dart:convert';
+import 'dart:io';
 
-Future<List<FarmLotModel>> getLots() {
+import 'package:agroxpert/models/farm_lot_model.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
+Future<List<FarmLotModel>> getLots() async {
   List<FarmLotModel> lots = [];
-  for (int i = 0; i < 10; i++) {
-    lots.add(FarmLotModel(
-      id: i.toString(),
-      nameLot: String.fromCharCodes(List.generate(10, (index) => 65 + index)),
-      numberTrees: int.parse(
-          String.fromCharCodes(List.generate(3, (index) => 48 + index))),
-      productionDate: ProductionDate(
-        primary: Production(initial: DateTime.now(), theFinal: DateTime.now()),
-        secondary:
-            Production(initial: DateTime.now(), theFinal: DateTime.now()),
-      ),
-      treesAge: double.parse(
-          String.fromCharCodes(List.generate(2, (index) => 48 + index))),
-    ));
-  }
-  return Future.delayed(Duration(seconds: 2), () => lots);
+  String jsonString = await rootBundle.loadString('lib/utils/mocks/lots.json');
+  final jsonResponse = json.decode(jsonString);
+  var jsonList = jsonResponse['response'];
+  lots = jsonList
+      .map<FarmLotModel>((json) => FarmLotModel.fromJson(json))
+      .toList();
+  return lots;
 }

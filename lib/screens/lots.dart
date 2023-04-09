@@ -28,26 +28,34 @@ class _LotsScreenState extends State<LotsScreen> {
             return Text('Error al obtener los datos');
           } else if (snapshot.connectionState == ConnectionState.done) {
             final lots_list = snapshot.data as List<FarmLotModel>;
-            return GridView.builder(
-              padding: EdgeInsets.all(16.0),
-              itemCount: lots_list.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16.0,
-                mainAxisSpacing: 16.0,
-              ),
-              itemBuilder: (context, index) {
-                final lot = lots_list[index];
-                return Card(
-                  child: InkWell(
-                    onTap: () => Navigator.of(context)
-                        .pushNamed('/estimacion/${lot.id}'),
-                    child: Center(
-                      child: Text('Lot ${lot.nameLot}'),
+            return Column(
+              children: [
+                Expanded(
+                    child: GridView.builder(
+                  padding: EdgeInsets.all(16.0),
+                  itemCount: lots_list.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16.0,
+                    mainAxisSpacing: 16.0,
+                  ),
+                  itemBuilder: (context, index) {
+                    final lot = lots_list[index];
+                    return bodyCardLot(lot);
+                  },
+                )),
+                //FloatingActionButton alignment right
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: FloatingActionButton(
+                      onPressed: () => {print("Agregando nuevo")},
+                      child: const Icon(Icons.add),
                     ),
                   ),
-                );
-              },
+                ),
+              ],
             );
           } else {
             return const Center(
@@ -55,6 +63,36 @@ class _LotsScreenState extends State<LotsScreen> {
             );
           }
         },
+      ),
+    );
+  }
+
+// Widget bodycard
+  Widget bodyCardLot(FarmLotModel lot) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              lot.nameLot,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text("Número de árboles: ${lot.numberTrees}"),
+            ElevatedButton(
+              child: Text("Ver estimado"),
+              onPressed: () => {
+                Navigator.of(context)
+                    .pushNamed('/estimation', arguments: lot.id)
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
