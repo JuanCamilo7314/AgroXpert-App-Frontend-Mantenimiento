@@ -1,3 +1,4 @@
+import 'package:agroxpert/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'AgroXdemo Demo Page'),
+      initialRoute: '/home',
+      routes: routes,
     );
   }
 }
@@ -45,45 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'The person who has make this change was Samuel',
-            ),
-
-            Image.network(
-              'https://picsum.photos/400/400',
-              width: 300,
-              height: 300,
-            ),
-            const Text(
-              'Random Image from the internet',
-            ),
-            MouseRegion(
-              onEnter: (_) => _toggleHover(true),
-              onExit: (_) => _toggleHover(false),
-              child: Text(
-                'Hola Mundo, from Yorman with hover :)',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: _isHovering ? Colors.red : Colors.black,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20), // agregar un espacio en blanco
-            const Text(
-              'Hello World, from Camila', // agregar el nuevo widget de texto
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-              ),
-            ),
-          ],
-        ),
-      ),
+          child: FloatingActionButton(
+        onPressed: () => Navigator.of(context).pushNamed('/lots'),
+        child: const Icon(Icons.arrow_forward_ios),
+      )),
     );
   }
 }

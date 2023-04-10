@@ -1,0 +1,174 @@
+{
+  "response": [
+    {
+      "_id": "L001",
+      "nameLot": "Lote 1",
+      "numberTrees": 250,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-01-15T06:31:15.000Z",
+          "final": "2022-09-23T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-01-14T06:31:15.000Z",
+          "final": "2022-09-29T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 250.5
+    },
+    {
+      "_id": "L002",
+      "nameLot": "Lote 2",
+      "numberTrees": 50,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-03-17T06:31:15.000Z",
+          "final": "2022-12-08T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-04-11T06:31:15.000Z",
+          "final": "2023-01-25T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 125.5
+    },
+    {
+      "_id": "L003",
+      "nameLot": "Lote 3",
+      "numberTrees": 60,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-06-11T06:31:15.000Z",
+          "final": "2023-03-04T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-05-18T06:31:15.000Z",
+          "final": "2022-02-27T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 170.8
+    },
+    {
+      "_id": "L004",
+      "nameLot": "Lote 4",
+      "numberTrees": 60,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-06-11T06:31:15.000Z",
+          "final": "2023-03-04T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-05-18T06:31:15.000Z",
+          "final": "2022-02-27T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 170.8
+    },
+    {
+      "_id": "L005",
+      "nameLot": "Lote 5",
+      "numberTrees": 60,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-06-11T06:31:15.000Z",
+          "final": "2023-03-04T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-05-18T06:31:15.000Z",
+          "final": "2022-02-27T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 170.8
+    },
+    {
+      "_id": "L006",
+      "nameLot": "Lote 6",
+      "numberTrees": 60,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-06-11T06:31:15.000Z",
+          "final": "2023-03-04T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-05-18T06:31:15.000Z",
+          "final": "2022-02-27T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 170.8
+    },
+    {
+      "_id": "L007",
+      "nameLot": "Lote 7",
+      "numberTrees": 60,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-06-11T06:31:15.000Z",
+          "final": "2023-03-04T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-05-18T06:31:15.000Z",
+          "final": "2022-02-27T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 170.8
+    },
+    {
+      "_id": "L008",
+      "nameLot": "Lote 8",
+      "numberTrees": 60,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-06-11T06:31:15.000Z",
+          "final": "2023-03-04T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-05-18T06:31:15.000Z",
+          "final": "2022-02-27T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 170.8
+    },
+    {
+      "_id": "L009",
+      "nameLot": "Lote 9",
+      "numberTrees": 60,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-06-11T06:31:15.000Z",
+          "final": "2023-03-04T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-05-18T06:31:15.000Z",
+          "final": "2022-02-27T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 170.8
+    },
+    {
+      "_id": "L010",
+      "nameLot": "Lote 10",
+      "numberTrees": 60,
+      "treesAge": 8.5,
+      "productionDate": {
+        "primary": {
+          "initial": "2022-06-11T06:31:15.000Z",
+          "final": "2023-03-04T06:31:15.000Z"
+        },
+        "secondary": {
+          "initial": "2022-05-18T06:31:15.000Z",
+          "final": "2022-02-27T06:31:15.000Z"
+        }
+      },
+      "averageFruitWight": 170.8
+    }
+  ]
+}
