@@ -21,18 +21,18 @@ class _LotsScreenState extends State<LotsScreen> {
         future: getLots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            return Text('Error al obtener los datos');
+            return const Text('Error al obtener los datos');
           } else if (snapshot.connectionState == ConnectionState.done) {
             final lots_list = snapshot.data as List<FarmLotModel>;
             return Column(
               children: [
                 Expanded(
                     child: GridView.builder(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   itemCount: lots_list.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -77,15 +77,15 @@ class _LotsScreenState extends State<LotsScreen> {
           children: [
             Text(
               lot.nameLot,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text("Número de árboles: ${lot.numberTrees}"),
             ElevatedButton(
-              child: Text("Ver estimado"),
+              child: const Text("Ver estimado"),
               onPressed: () => {
                 Navigator.of(context)
                     .pushNamed('/estimation', arguments: lot.id)
