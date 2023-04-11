@@ -85,10 +85,10 @@ class _LotsScreenState extends State<LotsScreen> {
             const SizedBox(height: 8),
             Text("Número de árboles: ${lot.numberTrees}"),
             ElevatedButton(
-              child: const Text("Ver estimado"),
+              child: const Text("Ver Cosechas"),
               onPressed: () => {
                 Navigator.of(context)
-                    .pushNamed('/estimation', arguments: lot.id)
+                    .pushNamed('/harvests', arguments: lot.id)
               },
             ),
           ],
