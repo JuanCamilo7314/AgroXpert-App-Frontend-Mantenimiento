@@ -21,9 +21,9 @@ class _AccordionEstimates extends State<AccordionEstimates> {
       child: Column(children: [
         // The title
         ListTile(
-          title: Text(
-            widget.title,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          title: const Text(
+            'Estimacion #1 03/03/2021',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           trailing: IconButton(
             icon: Icon(
