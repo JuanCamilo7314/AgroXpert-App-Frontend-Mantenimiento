@@ -37,7 +37,7 @@ class _AccordionEstimates extends State<AccordionEstimates> {
         _showContent
             ? Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 child: _contentAccordion(widget.estimate),
               )
             : Container()
@@ -63,7 +63,7 @@ Widget _contentAccordion(EstimatesModel estimate) {
       _fieldAverageFruits(estimate.averageFruits),
       const SizedBox(height: 10),
       _fieldEstimatedProduction(estimate.estimatedProduction),
-      const SizedBox(height: 10),
+      const SizedBox(height: 20),
       _tableEstimatesTrees(estimate.treesAssessed),
     ],
   );
@@ -124,37 +124,84 @@ Widget _fieldEstimatedProduction(double estimatedProduction) {
 Widget _tableEstimatesTrees(List<TreesAssessed> treesAssessed) {
   int index = 1;
   return Table(
-      border: TableBorder.all(
-      color: Colors.grey,
+    border: TableBorder.all(
+      color: Colors.grey.shade600,
       width: 1,
       style: BorderStyle.solid,
     ),
     children: [
-      const TableRow(
-        children: [
+      TableRow(
+        decoration: BoxDecoration(
+          color: Colors.orange.shade300,
+          borderRadius: BorderRadius.circular(1.0),
+        ),
+        children: const [
           TableCell(
-            child: Text('Arbol'),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Arbol',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
           TableCell(
-            child: Text('Numero de frutos'),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Numero de Frutos',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
           TableCell(
-            child: Text('Cuartiles Evaluados'),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Cuartiles',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ],
       ),
-
       for (TreesAssessed treeAssessed in treesAssessed)
         TableRow(
           children: [
             TableCell(
-              child: Text((index++).toString()),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  (index++).toString(),
+                ),
+              ),
             ),
             TableCell(
-              child: Text('${treeAssessed.numFruits}'),
-            ),
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                '${treeAssessed.numFruits}',
+              ),
+            )),
             TableCell(
-              child: Text('${treeAssessed.numQuartiles}'),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '${treeAssessed.numQuartiles}',
+                ),
+              ),
             ),
           ],
         ),
