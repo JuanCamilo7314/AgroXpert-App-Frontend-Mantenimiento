@@ -24,7 +24,7 @@ class _AccordionFinalProduction extends State<AccordionFinalProduction> {
           child: Column(children: [
             ListTile(
               title: const Text(
-                'Reporte De Producción Final',
+                'Reporte de producción final',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               trailing: IconButton(

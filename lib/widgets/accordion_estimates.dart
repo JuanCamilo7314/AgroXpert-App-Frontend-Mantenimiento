@@ -48,7 +48,7 @@ class _AccordionEstimates extends State<AccordionEstimates> {
 
 Widget _titelAccordion(DateTime date, int index) {
   return Text(
-    'Estimacion #$index ${dateOnly(date)}',
+    'Estimación #$index ${dateOnly(date)}',
     style: const TextStyle(fontWeight: FontWeight.bold),
   );
 }

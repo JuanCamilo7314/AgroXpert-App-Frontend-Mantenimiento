@@ -33,9 +33,10 @@ class _FinalReportScreen extends State<FinalReportScreen> {
         appBar: AppBar(
           title: const Text('Informe Final de Cosecha'),
         ),
-        body: Column(children: [
+        body: SingleChildScrollView(
+        child: Column(children: [
           AccordionEstimates(estimate: estimateExm, index: 1),
           const AccordionFinalProduction(),
-        ]));
+        ])));
   }
 }
