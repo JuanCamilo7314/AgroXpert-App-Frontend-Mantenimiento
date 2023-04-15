@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'AgroXdemo Demo Page'),
+      //home: const EjemploVista2(),
     );
   }
 }
