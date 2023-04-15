@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
-import 'DetallesEstimacion.dart';
+import 'details_estimates.dart';
 
 List<Map<String, dynamic>> datos = [
   {
@@ -110,8 +110,8 @@ void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
   );
 }
 
-class EjemploVista2 extends StatelessWidget {
-  const EjemploVista2({Key? key}) : super(key: key);
+class historial_harvest extends StatelessWidget {
+  const historial_harvest({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
