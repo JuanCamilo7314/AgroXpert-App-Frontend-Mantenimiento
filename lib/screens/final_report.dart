@@ -35,6 +35,16 @@ class _FinalReportScreen extends State<FinalReportScreen> {
         ),
         body: SingleChildScrollView(
         child: Column(children: [
+          FutureBuilder(
+            future: Future.delayed(const Duration(seconds: 2)),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return AccordionEstimates(estimate: estimateExm, index: 0);
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
+          ),
           AccordionEstimates(estimate: estimateExm, index: 1),
           const AccordionFinalProduction(),
         ])));
