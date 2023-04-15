@@ -8,13 +8,15 @@ class FarmLotModel {
   int numberTrees;
   double treesAge;
   ProductionDate productionDate;
+  double averageFruitWeight;
 
   FarmLotModel(
       {required this.id,
       required this.nameLot,
       required this.numberTrees,
       required this.treesAge,
-      required this.productionDate});
+      required this.productionDate,
+      required this.averageFruitWeight});
 
   factory FarmLotModel.fromJson(Map<String, dynamic> json) {
     return FarmLotModel(
@@ -23,6 +25,7 @@ class FarmLotModel {
       numberTrees: json['numberTrees'],
       treesAge: json['treesAge'],
       productionDate: ProductionDate.fromJson(json['productionDate']),
+      averageFruitWeight: json['averageFruitWeight'],
     );
   }
 }
