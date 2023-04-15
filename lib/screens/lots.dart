@@ -88,7 +88,7 @@ class _LotsScreenState extends State<LotsScreen> {
               child: const Text("Ver Cosechas"),
               onPressed: () => {
                 Navigator.of(context)
-                    .pushNamed('/harvests', arguments: lot.id)
+                    .pushNamed('/historial_harvest', arguments: lot.id)
               },
             ),
           ],

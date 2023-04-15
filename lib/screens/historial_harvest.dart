@@ -193,7 +193,10 @@ class historial_harvest extends StatelessWidget {
                           child: Text(dato['estimates']),
                         ),*/
                         child: GestureDetector(
-                          onTap: () => _verDetalles(context, dato['estimates']),
+                          onTap: () => Navigator.pushNamed(
+                              context, '/estimates_production'),
+
+                          //_verDetalles(context, dato['estimates']),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

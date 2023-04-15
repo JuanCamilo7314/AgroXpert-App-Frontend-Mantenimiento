@@ -1,13 +1,12 @@
-import 'package:agroxpert/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:agroxpert/screens/EstimarProduccion/estimarProducciónView.dart';
+import 'package:agroxpert/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      // Aquí agregamos el generador de rutas
+      onGenerateRoute: Routes.generateRoute,
+      // La pantalla de inicio sigue siendo MyHomePage
       home: const MyHomePage(title: 'AgroXdemo Demo Page'),
       //home: const EjemploVista2(),
     );
@@ -33,14 +35,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _isHovering = false;
-
-  void _toggleHover(bool isHovering) {
-    setState(() {
-      _isHovering = isHovering;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,38 +45,29 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'The person who has make this change was Samuel',
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/estimates_production');
+              },
+              child: const Text('Estimados de Producción'),
             ),
-
-            Image.network(
-              'https://picsum.photos/400/400',
-              width: 300,
-              height: 300,
+            const SizedBox(
+              height: 20,
             ),
-            const Text(
-              'Random Image from the internet',
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/lots');
+              },
+              child: const Text('Lots'),
             ),
-            MouseRegion(
-              onEnter: (_) => _toggleHover(true),
-              onExit: (_) => _toggleHover(false),
-              child: Text(
-                'Hola Mundo, from Yorman with hover :)',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: _isHovering ? Colors.red : Colors.black,
-                ),
-              ),
+            const SizedBox(
+              height: 20,
             ),
-            const SizedBox(height: 20), // agregar un espacio en blanco
-            const Text(
-              'Hello World, from Camila', // agregar el nuevo widget de texto
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-              ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/historial_harvest');
+              },
+              child: const Text('Historial cosechas'),
             ),
           ],
         ),
