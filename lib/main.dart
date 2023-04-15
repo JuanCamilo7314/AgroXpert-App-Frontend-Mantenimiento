@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'vista/EjemploVista2.dart';
+import 'screens/EjemploVista2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //home: const MyHomePage(title: 'AgroXdemo Demo Page'),
-      home: const EjemploVista2(),
+      home: const MyHomePage(title: 'AgroXdemo Demo Page'),
+      //home: const EjemploVista2(),
     );
   }
 }
