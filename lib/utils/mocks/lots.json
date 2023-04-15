@@ -15,7 +15,7 @@
           "final": "2022-09-29T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 250.5
+      "averageFruitWeight": 250.5
     },
     {
       "_id": "L002",
@@ -32,7 +32,7 @@
           "final": "2023-01-25T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 125.5
+      "averageFruitWeight": 125.5
     },
     {
       "_id": "L003",
@@ -49,7 +49,7 @@
           "final": "2022-02-27T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 170.8
+      "averageFruitWeight": 170.8
     },
     {
       "_id": "L004",
@@ -66,7 +66,7 @@
           "final": "2022-02-27T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 170.8
+      "averageFruitWeight": 170.8
     },
     {
       "_id": "L005",
@@ -83,7 +83,7 @@
           "final": "2022-02-27T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 170.8
+      "averageFruitWeight": 170.8
     },
     {
       "_id": "L006",
@@ -100,7 +100,7 @@
           "final": "2022-02-27T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 170.8
+      "averageFruitWeight": 170.8
     },
     {
       "_id": "L007",
@@ -117,7 +117,7 @@
           "final": "2022-02-27T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 170.8
+      "averageFruitWeight": 170.8
     },
     {
       "_id": "L008",
@@ -134,7 +134,7 @@
           "final": "2022-02-27T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 170.8
+      "averageFruitWeight": 170.8
     },
     {
       "_id": "L009",
@@ -151,7 +151,7 @@
           "final": "2022-02-27T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 170.8
+      "averageFruitWeight": 170.8
     },
     {
       "_id": "L010",
@@ -168,7 +168,7 @@
           "final": "2022-02-27T06:31:15.000Z"
         }
       },
-      "averageFruitWight": 170.8
+      "averageFruitWeight": 170.8
     }
   ]
 }
