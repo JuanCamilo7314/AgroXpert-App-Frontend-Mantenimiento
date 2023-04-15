@@ -1,8 +1,6 @@
 import 'dart:core';
-import 'package:json_annotation/json_annotation.dart';
 
 class FinalProductionModel {
-  @JsonKey(name: '_id')
   String id;
   DateTime date;
   double totalProduction;
@@ -23,7 +21,7 @@ class FinalProductionModel {
 
   factory FinalProductionModel.fromJson(Map<String, dynamic> json) {
     return FinalProductionModel(
-      id: json['_id'],
+      id: json['id'],
       date: DateTime.parse(json['date']),
       totalProduction: json['totalProduction'],
       exportMarket: json['exportMarket'],

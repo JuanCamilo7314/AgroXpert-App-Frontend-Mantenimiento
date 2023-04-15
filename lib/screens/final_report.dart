@@ -45,8 +45,7 @@ class _FinalReportScreen extends State<FinalReportScreen> {
               }
             },
           ),
-          AccordionEstimates(estimate: estimateExm, index: 1),
-          const AccordionFinalProduction(),
+          const AccordionFinalProduction(idFinalProduction: '6430ab83e6ae07dbea1af50a'),
         ])));
   }
 }
