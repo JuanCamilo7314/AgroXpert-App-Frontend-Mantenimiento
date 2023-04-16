@@ -14,7 +14,6 @@ class AccordionFinalProduction extends StatefulWidget {
 
 class _AccordionFinalProduction extends State<AccordionFinalProduction> {
   bool _showContent = false;
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -77,7 +76,7 @@ Widget _fieldFinalDateProduction(DateTime date) {
     children: [
       const Icon(FlutterIcons.calendar_ant, color: Colors.green),
       const SizedBox(width: 8),
-      const Text('Fecha:',
+      const Text('Fecha: ',
           style: TextStyle(fontWeight: FontWeight.bold)),
       Text(dateOnly(date)),
     ],

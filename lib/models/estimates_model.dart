@@ -1,8 +1,6 @@
 import 'dart:core';
-import 'package:json_annotation/json_annotation.dart';
 
 class EstimatesModel {
-  @JsonKey(name: '_id')
   String id;
   DateTime date;
   int numberTrees;
@@ -23,9 +21,9 @@ class EstimatesModel {
 
   factory EstimatesModel.fromJson(Map<String, dynamic> json) {
     return EstimatesModel(
-      id: json['_id'],
+      id: json['id'],
       date: DateTime.parse(json['date']),
-      numberTrees: json['numberTrees'],
+      numberTrees: json['numTrees'],
       totalFruitsEstimates: json['totalFruitsEstimates'],
       averageFruits: json['averageFruits'],
       estimatedProduction: json['estimatedProduction'],
@@ -33,7 +31,6 @@ class EstimatesModel {
           json['treesAssessed'].map((x) => TreesAssessed.fromJson(x))),
     );
   }
-
 }
 
 class TreesAssessed {

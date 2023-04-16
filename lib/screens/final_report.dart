@@ -2,6 +2,7 @@ import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/material.dart';
 import '../widgets/accordion_estimates.dart';
 import '../widgets/accordion_final_production.dart';
+import '../services/estimation_api.dart';
 
 class FinalReportScreen extends StatefulWidget {
   const FinalReportScreen({super.key});
@@ -11,22 +12,6 @@ class FinalReportScreen extends StatefulWidget {
 }
 
 class _FinalReportScreen extends State<FinalReportScreen> {
-  final EstimatesModel estimateExm = EstimatesModel(
-      id: '1',
-      date: DateTime.now(),
-      averageFruits: 30,
-      estimatedProduction: 8000,
-      totalFruitsEstimates: 1000,
-      numberTrees: 20,
-      treesAssessed: <TreesAssessed>[
-        TreesAssessed(numFruits: 50, numQuartiles: 2),
-        TreesAssessed(numFruits: 40, numQuartiles: 1),
-        TreesAssessed(numFruits: 30, numQuartiles: 1),
-        TreesAssessed(numFruits: 20, numQuartiles: 1),
-        TreesAssessed(numFruits: 10, numQuartiles: 1),
-        TreesAssessed(numFruits: 0, numQuartiles: 1),
-      ]);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,18 +19,32 @@ class _FinalReportScreen extends State<FinalReportScreen> {
           title: const Text('Informe Final de Cosecha'),
         ),
         body: SingleChildScrollView(
-        child: Column(children: [
+            child: Column(children: [
           FutureBuilder(
-            future: Future.delayed(const Duration(seconds: 2)),
+            future: getEstimatesHarvest(['6430b352e6ae07dbea1af512', '6430b59de6ae07dbea1af517', '6430bdede6ae07dbea1af51d']),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return AccordionEstimates(estimate: estimateExm, index: 0);
+                final estimates = snapshot.data as List<EstimatesModel>;
+                return Column(
+                  children: estimates
+                      .asMap()
+                      .map((index, estimate) => MapEntry(
+                            index,
+                            AccordionEstimates(
+                              estimate: estimate,
+                              index: index + 1,
+                            ),
+                          ))
+                      .values
+                      .toList(),
+                );
               } else {
                 return const CircularProgressIndicator();
               }
             },
           ),
-          const AccordionFinalProduction(idFinalProduction: '6430ab83e6ae07dbea1af50a'),
+          const AccordionFinalProduction(
+              idFinalProduction: '6430ab83e6ae07dbea1af50a'),
         ])));
   }
 }

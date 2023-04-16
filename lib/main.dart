@@ -16,11 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // Aquí agregamos el generador de rutas
       onGenerateRoute: Routes.generateRoute,
-      // La pantalla de inicio sigue siendo MyHomePage
       home: const MyHomePage(title: 'AgroXdemo Demo Page'),
-      //home: const EjemploVista2(),
     );
   }
 }
