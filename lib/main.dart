@@ -1,12 +1,12 @@
-import 'package:agroxpert/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:agroxpert/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/home',
-      routes: routes,
+      onGenerateRoute: Routes.generateRoute,
+      home: const MyHomePage(title: 'AgroXdemo Demo Page'),
     );
   }
 }
@@ -32,14 +32,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _isHovering = false;
-
-  void _toggleHover(bool isHovering) {
-    setState(() {
-      _isHovering = isHovering;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,10 +39,36 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-          child: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed('/lots'),
-        child: const Icon(Icons.arrow_forward_ios),
-      )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/estimates_production');
+              },
+              child: const Text('Estimados de Producción'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/lots');
+              },
+              child: const Text('Lots'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/historial_harvest');
+              },
+              child: const Text('Historial cosechas'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

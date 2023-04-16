@@ -5,18 +5,19 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
 
 class AccordionFinalProduction extends StatefulWidget {
-  const AccordionFinalProduction({super.key});
+  final String idFinalProduction;
+  const AccordionFinalProduction(
+      {super.key, required this.idFinalProduction});
   @override
   State<AccordionFinalProduction> createState() => _AccordionFinalProduction();
 }
 
 class _AccordionFinalProduction extends State<AccordionFinalProduction> {
   bool _showContent = false;
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getFinalReportProduction(),
+      future: getFinalReportProduction(widget.idFinalProduction),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         final finalProduction = snapshot.data as FinalProductionModel;
         return Card(
@@ -75,7 +76,7 @@ Widget _fieldFinalDateProduction(DateTime date) {
     children: [
       const Icon(FlutterIcons.calendar_ant, color: Colors.green),
       const SizedBox(width: 8),
-      const Text('Fecha:',
+      const Text('Fecha: ',
           style: TextStyle(fontWeight: FontWeight.bold)),
       Text(dateOnly(date)),
     ],
