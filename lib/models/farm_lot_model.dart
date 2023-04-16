@@ -2,7 +2,6 @@ import 'dart:core';
 import 'package:json_annotation/json_annotation.dart';
 
 class FarmLotModel {
-  @JsonKey(name: '_id')
   String id;
   String nameLot;
   int numberTrees;
@@ -20,7 +19,7 @@ class FarmLotModel {
 
   factory FarmLotModel.fromJson(Map<String, dynamic> json) {
     return FarmLotModel(
-      id: json['_id'],
+      id: json['id'],
       nameLot: json['nameLot'],
       numberTrees: json['numberTrees'],
       treesAge: json['treesAge'],

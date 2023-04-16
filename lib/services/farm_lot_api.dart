@@ -6,22 +6,11 @@ import 'package:agroxpert/models/farm_lot_model.dart';
 final dio = Dio(); // crea una instancia de Dio
 
 Future<List<FarmLotModel>> getLots() async {
-  List<FarmLotModel> lots = [];
+  final response = await dio.get('http://127.0.0.1:5000/farm-lot');
+  List<dynamic> dataInformation = response.data['data'];
 
-  try {
-    final response = await dio.get('http://127.0.0.1:5000/farm-lot');
+  List<FarmLotModel> lots =
+      dataInformation.map((e) => FarmLotModel.fromJson(e)).toList();
 
-    var jsonList = response.data.data;
-
-    print(response);
-    print("------------------");
-    print(jsonList);
-
-    lots = jsonList
-        .map<FarmLotModel>((json) => FarmLotModel.fromJson(json))
-        .toList();
-    return lots;
-  } catch (e) {
-    throw Exception(e);
-  }
+  return lots;
 }

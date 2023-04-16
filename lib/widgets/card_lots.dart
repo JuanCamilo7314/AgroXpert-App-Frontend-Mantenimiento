@@ -43,7 +43,7 @@ class _CardLotState extends State<CardLot> {
               ),
               onPressed: () => {
                 Navigator.of(context)
-                    .pushNamed('/harvests', arguments: widget.lot.id)
+                    .pushNamed('/historial_harvest', arguments: widget.lot.id)
               },
             ),
           ],

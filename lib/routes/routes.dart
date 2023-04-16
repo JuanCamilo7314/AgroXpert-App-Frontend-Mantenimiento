@@ -37,7 +37,7 @@ class Routes {
       case '/final_report':
         return MaterialPageRoute(builder: (_) => FinalReportScreen());
       case '/historial_harvest':
-        return MaterialPageRoute(builder: (_) => historial_harvest());
+        return MaterialPageRoute(builder: (_) => HistoricHarvest());
 
       // Agrega más rutas aquí si es necesario
       default:
