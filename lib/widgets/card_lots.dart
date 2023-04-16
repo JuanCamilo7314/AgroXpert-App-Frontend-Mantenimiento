@@ -1,6 +1,7 @@
 import 'package:agroxpert/models/farm_lot_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:agroxpert/screens/historial_harvest.dart';
 
 class CardLot extends StatefulWidget {
   final FarmLotModel lot;
@@ -42,8 +43,12 @@ class _CardLotState extends State<CardLot> {
                 ],
               ),
               onPressed: () => {
-                Navigator.of(context)
-                    .pushNamed('/historial_harvest', arguments: widget.lot.id)
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HistoricHarvest(farmLotId: widget.lot.id),
+                  ),
+                ),
               },
             ),
           ],

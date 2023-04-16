@@ -4,105 +4,6 @@ import 'details_estimates.dart';
 import '../services/harvest_api.dart';
 import 'package:agroxpert/models/historic_harvest_model.dart';
 
-// List<Map<String, dynamic>> datos = [
-//   {
-//     "idHarvest": "1",
-//     "cosecha": "Cosecha 1",
-//     "type": "primary",
-//     "idFarmLot": "L001",
-//     "evaluationStartDate": "2023-03-28",
-//     "evaluationEndDate": "2023-05-27",
-//     "estimates": [
-//       {
-//         "idEstimates": "1",
-//         "date": "2023-04-01",
-//         "treesAssessed": [
-//           {"numFruits": 20, "numQuartiles": 5},
-//           {"numFruits": 15, "numQuartiles": 3},
-//           {"numFruits": 25, "numQuartiles": 6}
-//         ],
-//         "numTrees": 10,
-//         "totalFruitsEstimates": 1500,
-//         "averageFruits": 30,
-//         "estimatedProduction": 45000
-//       },
-//       {
-//         "idEstimates": "2",
-//         "date": "2023-04-15",
-//         "treesAssessed": [
-//           {"numFruits": 20, "numQuartiles": 5},
-//           {"numFruits": 15, "numQuartiles": 3},
-//           {"numFruits": 8, "numQuartiles": 1},
-//           {"numFruits": 25, "numQuartiles": 6}
-//         ],
-//         "numTrees": 20,
-//         "totalFruitsEstimates": 2000,
-//         "averageFruits": 20,
-//         "estimatedProduction": 40000
-//       },
-//       {
-//         "idEstimates": "3",
-//         "date": "2023-05-25",
-//         "treesAssessed": [
-//           {"numFruits": 20, "numQuartiles": 5},
-//           {"numFruits": 35, "numQuartiles": 8},
-//           {"numFruits": 25, "numQuartiles": 6}
-//         ],
-//         "numTrees": 10,
-//         "totalFruitsEstimates": 1000,
-//         "averageFruits": 30,
-//         "estimatedProduction": 30000
-//       }
-//     ],
-//     "estimacionFinal": "EF001",
-//   },
-//   {
-//     "idHarvest": "2",
-//     "cosecha": "Cosecha 2",
-//     "type": "secundary",
-//     "idFarmLot": "L001",
-//     "evaluationStartDate": "2023-06-01",
-//     "evaluationEndDate": "2023-08-30",
-//     "estimates": [
-//       {
-//         "idEstimates": "4",
-//         "date": "2023-06-15",
-//         "treesAssessed": [
-//           {"numFruits": 20, "numQuartiles": 5},
-//           {"numFruits": 10, "numQuartiles": 1}
-//         ],
-//         "numTrees": 22,
-//         "totalFruitsEstimates": 500,
-//         "averageFruits": 15,
-//         "estimatedProduction": 7500
-//       },
-//       {
-//         "idEstimates": "5",
-//         "date": "2023-07-30",
-//         "treesAssessed": [
-//           {"numFruits": 20, "numQuartiles": 5},
-//           {"numFruits": 30, "numQuartiles": 5},
-//           {"numFruits": 20, "numQuartiles": 7}
-//         ],
-//         "numTrees": 30,
-//         "totalFruitsEstimates": 3000,
-//         "averageFruits": 25,
-//         "estimatedProduction": 75000
-//       }
-//     ],
-//     "estimacionFinal": "EF002",
-//   },
-//   {
-//     "idHarvest": "3",
-//     "cosecha": "Cosecha 3",
-//     "type": "secundary",
-//     "idFarmLot": "L001",
-//     "evaluationStartDate": "2023-05-01",
-//     "evaluationEndDate": "2023-05-30",
-//     "estimates ": [],
-//     "estimacionFinal": ""
-//   },
-// ];
 
 void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
   Navigator.push(
@@ -113,7 +14,8 @@ void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
 }
 
 class HistoricHarvest extends StatefulWidget {
-  const HistoricHarvest({super.key});
+   final String farmLotId;
+  const HistoricHarvest({super.key, required this.farmLotId});
 
   @override
   State<HistoricHarvest> createState() => _HistoricHarvestState();
@@ -124,17 +26,12 @@ class HistoricHarvest extends StatefulWidget {
 class _HistoricHarvestState extends State<HistoricHarvest> {
   @override
   Widget build(BuildContext context) {
-    final String farmLotId =
-        ModalRoute.of(context)!.settings.arguments as String;
-
-    print(farmLotId);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Historial de estimaciones'),
       ),
       body: FutureBuilder(
-        future: getHistoricHarvest(farmLotId),
+        future: getHistoricHarvest(widget.farmLotId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

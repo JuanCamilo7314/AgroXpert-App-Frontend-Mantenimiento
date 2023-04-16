@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 final dio = Dio();
 
 Future<List<HistoricHarvestModel>> getHistoricHarvest(String idFarmLot) async {
+  print('idFarmLot: $idFarmLot');
   final response = await dio.get('localhost:5000/harvest/historic/$idFarmLot');
 
   List<dynamic> dataInformation = response.data['data'];
