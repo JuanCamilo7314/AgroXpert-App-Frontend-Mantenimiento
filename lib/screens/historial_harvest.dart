@@ -4,7 +4,6 @@ import 'details_estimates.dart';
 import '../services/harvest_api.dart';
 import 'package:agroxpert/models/historic_harvest_model.dart';
 
-
 void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
   Navigator.push(
     context,
@@ -14,7 +13,7 @@ void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
 }
 
 class HistoricHarvest extends StatefulWidget {
-   final String farmLotId;
+  final String farmLotId;
   const HistoricHarvest({super.key, required this.farmLotId});
 
   @override
