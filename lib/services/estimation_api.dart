@@ -20,14 +20,7 @@ Future<List<EstimatesModel>> getEstimatesHarvest(List<String> idsEstimatesHarves
   for (var estimate in response.data['data']) {
     estimates.add(EstimatesModel.fromJson(estimate));
   }
-
-  for (var estimate in estimates) {
-    print(estimate.id);
-    for (var tree in estimate.treesAssessed) {
-      print('numFruits: ${tree.numFruits}, numQuartiles: ${tree.numQuartiles}');
-    }
-    print('------------------------------------------');
-  }
+  
   return estimates;
 }
 

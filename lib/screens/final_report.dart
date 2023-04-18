@@ -5,7 +5,9 @@ import '../widgets/accordion_final_production.dart';
 import '../services/estimation_api.dart';
 
 class FinalReportScreen extends StatefulWidget {
-  const FinalReportScreen({super.key});
+  final List<String> idEstimates;
+  final String idFinalProduction;
+  const FinalReportScreen({super.key, required this.idEstimates, required this.idFinalProduction});
 
   @override
   State<FinalReportScreen> createState() => _FinalReportScreen();
@@ -21,7 +23,7 @@ class _FinalReportScreen extends State<FinalReportScreen> {
         body: SingleChildScrollView(
             child: Column(children: [
           FutureBuilder(
-            future: getEstimatesHarvest(['6430b352e6ae07dbea1af512', '6430b59de6ae07dbea1af517', '6430bdede6ae07dbea1af51d']),
+            future: getEstimatesHarvest(widget.idEstimates),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 final estimates = snapshot.data as List<EstimatesModel>;
@@ -43,8 +45,7 @@ class _FinalReportScreen extends State<FinalReportScreen> {
               }
             },
           ),
-          const AccordionFinalProduction(
-              idFinalProduction: '6430ab83e6ae07dbea1af50a'),
+          AccordionFinalProduction(idFinalProduction: widget.idFinalProduction),
         ])));
   }
 }

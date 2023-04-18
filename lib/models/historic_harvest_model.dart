@@ -16,10 +16,19 @@ class HistoricHarvestModel {
   });
 
   factory HistoricHarvestModel.fromJson(Map<String, dynamic> json) {
+    Harvest newHarvest = Harvest.fromJson(json['harvest']);
+
+    FinalProductionModel newFinalProduction =
+        FinalProductionModel.fromJson(json['finalProduction']);
+
+    List<dynamic> estimatesJson = json['estimates'];
+    List<EstimatesModel> newsEstiamtes =
+        estimatesJson.map((json) => EstimatesModel.fromJson(json)).toList();
+
     return HistoricHarvestModel(
-      harvest: Harvest.fromJson(json['harvest']),
-      estimates: List<EstimatesModel>.from(json['estimates']),
-      finalProduction: FinalProductionModel.fromJson(json['finalProduction']),
+      harvest: newHarvest,
+      finalProduction: newFinalProduction,
+      estimates: newsEstiamtes,
     );
   }
 }

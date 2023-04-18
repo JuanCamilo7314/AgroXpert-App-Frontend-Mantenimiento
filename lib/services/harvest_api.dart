@@ -1,19 +1,17 @@
+import 'package:agroxpert/models/harvest_model.dart';
 import 'package:agroxpert/models/historic_harvest_model.dart';
 import 'package:dio/dio.dart';
 
+import '../models/estimates_model.dart';
+import '../models/final_production_model.dart';
+
 final dio = Dio();
 
-Future<List<HistoricHarvestModel>> getHistoricHarvest(String idFarmLot) async {
-  print('idFarmLot: $idFarmLot');
+Future <dynamic> getHistoricHarvest(String idFarmLot) async {
   final response =
       await dio.get('http://127.0.0.1:5000/harvest/historic/$idFarmLot');
 
-  List<dynamic> dataInformation = response.data['data'];
+  dynamic dataInformation = response.data['data'];
 
-  List<HistoricHarvestModel> historicHarvests =
-      dataInformation.map((e) => HistoricHarvestModel.fromJson(e)).toList();
-
-  print('historicHarvests: $historicHarvests');
-
-  return historicHarvests;
+  return dataInformation;
 }
