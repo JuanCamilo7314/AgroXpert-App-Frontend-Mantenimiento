@@ -16,9 +16,6 @@ class _LotsScreenState extends State<LotsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lots'),
-      ),
       body: FutureBuilder(
         future: getLots(),
         builder: (context, snapshot) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/estimarProduccionView.dart';
+import '../screens/estimates_production.dart';
 import '../screens/final_report.dart';
 import '../screens/harvests.dart';
 import '../screens/lots.dart';
@@ -8,8 +8,6 @@ import '../screens/historial_harvest.dart';
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/estimates_production':
-        return MaterialPageRoute(builder: (_) => EstimatesProductionScreen());
       case '/lots':
         return MaterialPageRoute(builder: (_) => LotsScreen());
       case '/harvests':

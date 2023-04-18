@@ -1,3 +1,4 @@
+import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/material.dart';
 import 'details_estimates.dart';
 import '../services/harvest_api.dart';
@@ -5,6 +6,8 @@ import '../services/harvest_api.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
 import 'package:agroxpert/screens/final_report.dart';
+
+import 'estimates_production.dart';
 
 void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
   Navigator.push(
@@ -42,7 +45,8 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
             return const Text('Error al obtener los datos');
           } else if (snapshot.connectionState == ConnectionState.done) {
             final historialHarvest = snapshot.data as List<dynamic>;
-            return Column(
+            return SingleChildScrollView(
+              child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Tabla
@@ -71,6 +75,7 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
                   ),
                 ),
               ],
+            ),
             );
           } else {
             return const Center(
@@ -220,7 +225,13 @@ Widget _buildEstimates(dynamic estimates) {
                   padding: const EdgeInsets.all(5),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Acción que se ejecuta al pulsar el botón
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EstimatesProductionScreen(
+                              estimate: estimate,
+                            ),
+                          ));
                     },
                     child: const Text('Ver detalle'),
                   ),
@@ -234,7 +245,7 @@ Widget _buildEstimates(dynamic estimates) {
 
 Widget _buildFinalReport(
     dynamic finalReport, List<dynamic> idEstimates, BuildContext context) {
-  List <String> ids = idEstimates.map((element) => element.toString()).toList();
+  List<String> ids = idEstimates.map((element) => element.toString()).toList();
   print(ids);
   return TableCell(
       child: Padding(
@@ -276,8 +287,7 @@ Widget _buildFinalReport(
                 context,
                 MaterialPageRoute(
                   builder: (context) => FinalReportScreen(
-                      idEstimates: ids,
-                      idFinalProduction: finalReport['id']),
+                      idEstimates: ids, idFinalProduction: finalReport['id']),
                 ),
               );
             },

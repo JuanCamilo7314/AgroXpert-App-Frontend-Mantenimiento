@@ -1,3 +1,4 @@
+import 'package:agroxpert/screens/lots.dart';
 import 'package:flutter/material.dart';
 import 'package:agroxpert/routes/routes.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: Routes.generateRoute,
-      home: const MyHomePage(title: 'AgroXdemo Demo Page'),
+      home: const MyHomePage(title: 'AgroXpert Home'),
     );
   }
 }
@@ -38,37 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/estimates_production');
-              },
-              child: const Text('Estimados de Producción'),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/lots');
-              },
-              child: const Text('Lots'),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/historial_harvest');
-              },
-              child: const Text('Historial cosechas'),
-            ),
-          ],
-        ),
-      ),
+      body: const LotsScreen(),
     );
   }
 }
