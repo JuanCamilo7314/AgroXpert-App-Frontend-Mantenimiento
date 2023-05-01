@@ -76,7 +76,7 @@ class PieGraphFinalReportState extends State<PieGraphFinalReport> {
           );
         case 1:
           return PieChartSectionData(
-            color: const Color.fromRGBO(255, 186, 33, 1),
+            color: const Color.fromRGBO(255, 183, 77, 1),
             value: finalProduction.nationalMarket,
             title: '${percent(finalProduction.nationalMarket, finalProduction.totalProduction)}%',
             radius: radius,
@@ -127,7 +127,7 @@ class PieGraphFinalReportState extends State<PieGraphFinalReport> {
             Container(
               width: 20,
               height: 20,
-              color: const Color.fromRGBO(255, 186, 33, 1),
+              color: const Color.fromRGBO(255, 183, 77, 1),
             ),
             const SizedBox(width: 10),
             const Text('Nacional'),
