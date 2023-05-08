@@ -1,12 +1,12 @@
-import 'package:agroxpert/models/estimates_production.dart';
+import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
 
-import '../models/estimates_production.dart';
+import '../models/estimates_model.dart';
 
 class AccordionEstimates extends StatefulWidget {
-  final EstimatesProductionModel estimate;
+  final EstimatesModel estimate;
   final int index;
 
   const AccordionEstimates(

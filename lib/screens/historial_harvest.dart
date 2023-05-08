@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/material.dart';
 import 'details_estimates.dart';
@@ -6,7 +8,7 @@ import '../services/harvest_api.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
 import 'package:agroxpert/screens/final_report.dart';
-
+import 'package:agroxpert/screens/estimates_form.dart';
 import 'estimates_production.dart';
 
 void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
@@ -20,6 +22,7 @@ void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
 class HistoricHarvest extends StatefulWidget {
   final String farmLotId;
   const HistoricHarvest({super.key, required this.farmLotId});
+  
 
   @override
   State<HistoricHarvest> createState() => _HistoricHarvestState();
@@ -47,35 +50,35 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
             final historialHarvest = snapshot.data as List<dynamic>;
             return SingleChildScrollView(
               child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Tabla
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Table(
-                    columnWidths: const {
-                      0: FlexColumnWidth(2),
-                      1: FlexColumnWidth(2),
-                      2: FlexColumnWidth(2),
-                    },
-                    border: TableBorder.all(width: 1.0),
-                    children: [
-                      _tableHeader(context),
-                      ..._builRowInfo(historialHarvest, context),
-                    ],
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Tabla
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Table(
+                      columnWidths: const {
+                        0: FlexColumnWidth(2),
+                        1: FlexColumnWidth(2),
+                        2: FlexColumnWidth(2),
+                      },
+                      border: TableBorder.all(width: 1.0),
+                      children: [
+                        _tableHeader(context),
+                        ..._builRowInfo(historialHarvest, context),
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Acción que se ejecuta al pulsar el botón
-                    },
-                    child: const Text('Estimar produccion'),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Acción que se ejecuta al pulsar el botón
+                      },
+                      child: const Text('Agregar Cosecha'),
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
             );
           } else {
             return const Center(
@@ -135,7 +138,7 @@ List<TableRow> _builRowInfo(
     tableRows.add(
       TableRow(
         children: [
-          _buildHarvest(harvest['harvest'], index),
+          _buildHarvest(context,harvest['harvest'], index),
           _buildEstimates(harvest['estimates']),
           _buildFinalReport(harvest['finalProduction'],
               harvest['harvest']['estimates '], context),
@@ -147,30 +150,62 @@ List<TableRow> _builRowInfo(
   return tableRows;
 }
 
-Widget _buildHarvest(dynamic harvest, int index) {
+Widget _buildHarvest(BuildContext context,dynamic harvest, int index) {
   return TableCell(
-      child: Column(
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text('Cosecha $index', style: const TextStyle(fontSize: 16)),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          dateOnly(DateTime.parse(harvest['evaluationStartDate'])),
-          style: const TextStyle(fontSize: 16),
+    child: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('Cosecha $index', style: const TextStyle(fontSize: 16)),
         ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          dateOnly(DateTime.parse(harvest['evaluationEndDate'])),
-          style: const TextStyle(fontSize: 16),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            dateOnly(DateTime.parse(harvest['evaluationStartDate'])),
+            style: const TextStyle(fontSize: 16),
+          ),
         ),
-      ),
-    ],
-  ));
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            dateOnly(DateTime.parse(harvest['evaluationEndDate'])),
+            style: const TextStyle(fontSize: 16),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Text('Agregar Estimación', style: TextStyle(fontSize: 16)),
+              SizedBox(width: 10),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyForm(),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 Widget _buildEstimates(dynamic estimates) {
