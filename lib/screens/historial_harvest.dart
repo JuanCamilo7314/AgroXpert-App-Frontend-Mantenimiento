@@ -1,11 +1,10 @@
-import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/material.dart';
 import 'details_estimates.dart';
 import '../services/harvest_api.dart';
-//import 'package:agroxpert/models/historic_harvest_model.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
 import 'package:agroxpert/screens/final_report.dart';
+import 'package:agroxpert/widgets/graphs/graph_harvest_production.dart';
 
 import 'estimates_production.dart';
 
@@ -47,35 +46,37 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
             final historialHarvest = snapshot.data as List<dynamic>;
             return SingleChildScrollView(
               child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Tabla
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Table(
-                    columnWidths: const {
-                      0: FlexColumnWidth(2),
-                      1: FlexColumnWidth(2),
-                      2: FlexColumnWidth(2),
-                    },
-                    border: TableBorder.all(width: 1.0),
-                    children: [
-                      _tableHeader(context),
-                      ..._builRowInfo(historialHarvest, context),
-                    ],
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Tabla
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Table(
+                      columnWidths: const {
+                        0: FlexColumnWidth(2),
+                        1: FlexColumnWidth(2),
+                        2: FlexColumnWidth(2),
+                      },
+                      border: TableBorder.all(width: 1.0),
+                      children: [
+                        _tableHeader(context),
+                        ..._builRowInfo(historialHarvest, context),
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Acción que se ejecuta al pulsar el botón
-                    },
-                    child: const Text('Estimar produccion'),
+                  const GraphHarvestProduction(),
+
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Acción que se ejecuta al pulsar el botón
+                      },
+                      child: const Text('Estimar produccion'),
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
             );
           } else {
             return const Center(
@@ -246,7 +247,6 @@ Widget _buildEstimates(dynamic estimates) {
 Widget _buildFinalReport(
     dynamic finalReport, List<dynamic> idEstimates, BuildContext context) {
   List<String> ids = idEstimates.map((element) => element.toString()).toList();
-  print(ids);
   return TableCell(
       child: Padding(
     padding: const EdgeInsets.all(8.0),

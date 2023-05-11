@@ -3,12 +3,14 @@ import '../services/final_report_api.dart';
 import '../models/final_production_model.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
+import './graphs/piegraph_final_report.dart';
 
 class AccordionFinalProduction extends StatefulWidget {
   final String idFinalProduction;
   const AccordionFinalProduction(
       {super.key, required this.idFinalProduction});
   @override
+  
   State<AccordionFinalProduction> createState() => _AccordionFinalProduction();
 }
 
@@ -66,6 +68,12 @@ Widget _contentAccordion(FinalProductionModel finalProduction) {
       _fieldWaste(finalProduction.waste),
       const SizedBox(height: 20),
       _tableCaliberDivision(finalProduction.caliberDivision),
+      const SizedBox(height: 20),
+      const Text(
+        'Grafica de producción final',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      ),
+      PieGraphFinalReport(finalProduction:  finalProduction),
     ],
   );
 }
@@ -135,7 +143,6 @@ Widget _fieldWaste(double waste) {
   );
 }
 
-
 Widget _tableCaliberDivision(List<CaliberDivision> calibersDivision) {
   int index = 1;
   return Table(
@@ -200,4 +207,3 @@ Widget _tableCaliberDivision(List<CaliberDivision> calibersDivision) {
     ],
   );
 }
-

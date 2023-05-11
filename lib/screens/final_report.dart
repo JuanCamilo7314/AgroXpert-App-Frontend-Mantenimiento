@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../widgets/accordion_estimates.dart';
 import '../widgets/accordion_final_production.dart';
 import '../services/estimation_api.dart';
+import '../widgets/graphs/bargraph_estimaciones.dart';
+import '../models/final_production_model.dart';
 
 class FinalReportScreen extends StatefulWidget {
   final List<String> idEstimates;
@@ -46,6 +48,8 @@ class _FinalReportScreen extends State<FinalReportScreen> {
             },
           ),
           AccordionFinalProduction(idFinalProduction: widget.idFinalProduction),
+          AccordionBarGraph(idEstimates: widget.idEstimates, idFinalProduction: widget.idFinalProduction),
+          //const BarChart(),
         ])));
   }
 }
