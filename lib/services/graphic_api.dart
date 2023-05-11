@@ -24,19 +24,22 @@ Future getEstimatesVsProduction(
 }
 
 
-Map<String, dynamic> mapData(dynamic estimates, dynamic productionFinal){
-  Map<String, dynamic> data = {
-    'estimates': [],
-    'producctionFinal': 0
-  };
+List<DataGraph> mapData(dynamic estimates, dynamic productionFinal){
+  List<DataGraph> dataGraph = [];
 
-  data['producctionFinal'] = productionFinal['totalProduction'];
+  dataGraph.add(DataGraph('Producción Final', productionFinal['totalProduction']));
 
   for (var estimate in estimates) {
-    data['estimates'].add(estimate['estimatedProduction']);
+    dataGraph.add(DataGraph(estimate['date'], estimate['totalProduction']));
   }
 
-  return data;
+  return dataGraph;
+}
+
+class DataGraph {
+  DataGraph(this.type, this.value);
+  final String type;
+  final int value;
 }
 
 

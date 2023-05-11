@@ -49,6 +49,7 @@ class _FinalReportScreen extends State<FinalReportScreen> {
           ),
           AccordionFinalProduction(idFinalProduction: widget.idFinalProduction),
           AccordionBarGraph(idEstimates: widget.idEstimates, idFinalProduction: widget.idFinalProduction),
+          //const BarChart(),
         ])));
   }
 }

@@ -1,8 +1,5 @@
-import 'package:agroxpert/models/estimates_model.dart';
-import 'package:agroxpert/models/final_production_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:agroxpert/utils/date_convert.dart';
 import 'package:agroxpert/services/graphic_api.dart';
 
 class AccordionBarGraph extends StatefulWidget {
@@ -40,16 +37,17 @@ class _AccordionBarGraph extends State<AccordionBarGraph> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 child: FutureBuilder(
-            future: getEstimatesVsProduction(widget.idEstimates, widget.idFinalProduction),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                final dataGraphs = snapshot.data;
-                return _contentAccordion(dataGraphs);
-              } else {
-                return const CircularProgressIndicator();
-              }
-            },
-          ),
+                  future: getEstimatesVsProduction(
+                      widget.idEstimates, widget.idFinalProduction),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      final dataGraphs = snapshot.data as List<DataGraph>;
+                      return Container();
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
               )
             : Container()
       ]),
@@ -61,13 +59,5 @@ Widget _titelAccordion() {
   return const Text(
     'Estimaciones vs Producción',
     style: TextStyle(fontWeight: FontWeight.bold),
-  );
-}
-
-Widget _contentAccordion(dynamic dataGraphs) {
-  print(dataGraphs);
-  return Column(
-    children: [  
-    ],
   );
 }
