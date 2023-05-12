@@ -22,7 +22,6 @@ void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
 class HistoricHarvest extends StatefulWidget {
   final String farmLotId;
   const HistoricHarvest({super.key, required this.farmLotId});
-  
 
   @override
   State<HistoricHarvest> createState() => _HistoricHarvestState();
@@ -138,7 +137,7 @@ List<TableRow> _builRowInfo(
     tableRows.add(
       TableRow(
         children: [
-          _buildHarvest(context,harvest['harvest'], index),
+          _buildHarvest(context, harvest['harvest'], index),
           _buildEstimates(harvest['estimates']),
           _buildFinalReport(harvest['finalProduction'],
               harvest['harvest']['estimates '], context),
@@ -150,7 +149,7 @@ List<TableRow> _builRowInfo(
   return tableRows;
 }
 
-Widget _buildHarvest(BuildContext context,dynamic harvest, int index) {
+Widget _buildHarvest(BuildContext context, dynamic harvest, int index) {
   return TableCell(
     child: Column(
       children: [
@@ -176,25 +175,30 @@ Widget _buildHarvest(BuildContext context,dynamic harvest, int index) {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Text('Agregar Estimación', style: TextStyle(fontSize: 16)),
-              SizedBox(width: 10),
+              const Expanded(
+                flex: 1,
+                child:
+                    Text('Agregar Estimación', style: TextStyle(fontSize: 16)),
+              ),
+              const SizedBox(width: 10),
               InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MyForm(),
+                      builder: (context) =>
+                          AddTreeForm(),
                     ),
                   );
                 },
                 child: Container(
                   width: 40,
                   height: 40,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.blue,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.add,
                     color: Colors.white,
                   ),
@@ -207,6 +211,7 @@ Widget _buildHarvest(BuildContext context,dynamic harvest, int index) {
     ),
   );
 }
+
 
 Widget _buildEstimates(dynamic estimates) {
   return TableCell(
