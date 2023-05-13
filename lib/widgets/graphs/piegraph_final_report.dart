@@ -64,8 +64,8 @@ class PieGraphFinalReportState extends State<PieGraphFinalReport> {
         case 0:
           return PieChartSectionData(
             color: const Color.fromRGBO(126, 217, 87, 1),
-            value: finalProduction.exportMarket,
-            title: '${percent(finalProduction.exportMarket, finalProduction.totalProduction)}%',
+            value: finalProduction.exportMarket.toDouble(),
+            title: '${percent(finalProduction.exportMarket.toDouble(), finalProduction.totalProduction.toDouble())}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -77,8 +77,8 @@ class PieGraphFinalReportState extends State<PieGraphFinalReport> {
         case 1:
           return PieChartSectionData(
             color: const Color.fromRGBO(255, 183, 77, 1),
-            value: finalProduction.nationalMarket,
-            title: '${percent(finalProduction.nationalMarket, finalProduction.totalProduction)}%',
+            value: finalProduction.nationalMarket.toDouble(),
+            title: '${percent(finalProduction.nationalMarket.toDouble(), finalProduction.totalProduction.toDouble())}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -90,8 +90,8 @@ class PieGraphFinalReportState extends State<PieGraphFinalReport> {
         case 2:
           return PieChartSectionData(
             color: const Color.fromRGBO(101, 178, 162, 1),
-            value: finalProduction.waste,
-            title: '${percent(finalProduction.waste, finalProduction.totalProduction)}%',
+            value: finalProduction.waste.toDouble(),
+            title: '${percent(finalProduction.waste.toDouble(), finalProduction.totalProduction.toDouble())}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,

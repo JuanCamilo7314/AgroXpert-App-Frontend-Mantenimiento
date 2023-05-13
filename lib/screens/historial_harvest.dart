@@ -5,6 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
 import 'package:agroxpert/screens/final_report.dart';
 import 'package:agroxpert/widgets/graphs/graph_harvest_production.dart';
+import 'package:agroxpert/screens/create_final_report.dart';
 
 import 'estimates_production.dart';
 
@@ -130,23 +131,22 @@ List<TableRow> _builRowInfo(
     List<dynamic> historialHarvest, BuildContext context) {
   List<TableRow> tableRows = [];
   int index = 0;
+  String harvestId = '';
 
   if (historialHarvest == null) {
     return tableRows;
   }
 
-  print(historialHarvest);
-
   for (var harvest in historialHarvest) {
     index++;
-    print(harvest['estimates']);
+    harvestId = harvest['harvest']['id'];
     tableRows.add(
       TableRow(
         children: [
           _buildHarvest(harvest['harvest'], index),
           _buildEstimates(harvest['estimates']),
           _buildFinalReport(harvest['finalProduction'],
-              harvest['harvest']['estimates '], context),
+              harvest['harvest']['estimates '], harvestId, context),
         ],
       ),
     );
@@ -263,8 +263,8 @@ Widget _buildEstimates(dynamic estimates) {
   );
 }
 
-Widget _buildFinalReport(
-    dynamic finalReport, List<dynamic> idEstimates, BuildContext context) {
+Widget _buildFinalReport(dynamic finalReport, List<dynamic> idEstimates,
+    String harvestId, BuildContext context) {
   if (finalReport == null || idEstimates == null) {
     return TableCell(
         child: Column(
@@ -272,15 +272,19 @@ Widget _buildFinalReport(
         const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
-            'No Producción Final, la cosecha no ha sido evaluada',
+            'No Producción Final, la cosecha no ha sido evaluada.',
             style: TextStyle(fontSize: 16),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(5),
+          padding: const EdgeInsets.all(3),
           child: ElevatedButton(
             onPressed: () {
-              print('Agregar Producción Final');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateFinalReportScreen( harvetsId:  harvestId),
+                  ));
             },
             child: const Text(
               'Agregar Producción Final',

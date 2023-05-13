@@ -91,7 +91,7 @@ Widget _fieldFinalDateProduction(DateTime date) {
   );
 }
 
-Widget _fieldTotalProduction(double totalProduction) {
+Widget _fieldTotalProduction(int totalProduction) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
@@ -104,7 +104,7 @@ Widget _fieldTotalProduction(double totalProduction) {
   );
 }
 
-Widget _fieldExportMarket(double exportedMarket) {
+Widget _fieldExportMarket(int exportedMarket) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
@@ -117,7 +117,7 @@ Widget _fieldExportMarket(double exportedMarket) {
   );
 }
 
-Widget _fieldNationalMarket(double nationalMarket) {
+Widget _fieldNationalMarket(int nationalMarket) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
@@ -130,7 +130,7 @@ Widget _fieldNationalMarket(double nationalMarket) {
   );
 }
 
-Widget _fieldWaste(double waste) {
+Widget _fieldWaste(int waste) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
