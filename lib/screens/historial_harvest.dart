@@ -131,8 +131,15 @@ List<TableRow> _builRowInfo(
   List<TableRow> tableRows = [];
   int index = 0;
 
+  if (historialHarvest == null) {
+    return tableRows;
+  }
+
+  print(historialHarvest);
+
   for (var harvest in historialHarvest) {
     index++;
+    print(harvest['estimates']);
     tableRows.add(
       TableRow(
         children: [
@@ -175,6 +182,18 @@ Widget _buildHarvest(dynamic harvest, int index) {
 }
 
 Widget _buildEstimates(dynamic estimates) {
+  if (estimates == null) {
+    return const TableCell(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          'No hay estimaciones',
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+    );
+  }
+
   return TableCell(
     child: ListView.builder(
         shrinkWrap: true,
@@ -246,6 +265,33 @@ Widget _buildEstimates(dynamic estimates) {
 
 Widget _buildFinalReport(
     dynamic finalReport, List<dynamic> idEstimates, BuildContext context) {
+  if (finalReport == null || idEstimates == null) {
+    return TableCell(
+        child: Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'No Producción Final, la cosecha no ha sido evaluada',
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(5),
+          child: ElevatedButton(
+            onPressed: () {
+              print('Agregar Producción Final');
+            },
+            child: const Text(
+              'Agregar Producción Final',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ],
+    ));
+  }
+
   List<String> ids = idEstimates.map((element) => element.toString()).toList();
   return TableCell(
       child: Padding(
