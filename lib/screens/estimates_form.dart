@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 
 class AddTreeForm extends StatefulWidget {
   @override
-  _AddTreeFormState createState() => _AddTreeFormState();
+  final int treeIndex;
+
+  const AddTreeForm({required this.treeIndex});
+
+  @override
+  State<AddTreeForm> createState() => _AddTreeFormState();
 }
 
 class _AddTreeFormState extends State<AddTreeForm> {
@@ -21,6 +26,7 @@ class _AddTreeFormState extends State<AddTreeForm> {
       );
       setState(() {
         _trees.add(tree);
+        print(widget.treeIndex); // Imprime el valor de treeIndex en la consola
       });
       _quartilesController.clear();
       _numeroFrutasController.clear();
@@ -84,7 +90,7 @@ class _AddTreeFormState extends State<AddTreeForm> {
                     TreesAssessed tree = _trees[index];
                     return ListTile(
                       title: Text(
-                          'Arbol # ${index+1}, Número de quartiles: ${tree.numQuartiles}, Número de frutas: ${tree.numFruits}'),
+                          'Arbol # ${index + 1}, Número de quartiles: ${tree.numQuartiles}, Número de frutas: ${tree.numFruits}'),
                     );
                   },
                 ),

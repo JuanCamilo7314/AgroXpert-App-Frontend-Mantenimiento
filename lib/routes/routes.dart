@@ -16,7 +16,7 @@ class Routes {
       case '/harvests':
         return MaterialPageRoute(builder: (_) => HarvestScreen());
       case '/form_estimates':
-        return MaterialPageRoute(builder: (_) => AddTreeForm());
+        return MaterialPageRoute(builder: (_) => AddTreeForm(treeIndex: 0,));
       // Agrega más rutas aquí si es necesario
       case '/create_lot':
         return MaterialPageRoute(builder: (_) => const CreateLotScreen());

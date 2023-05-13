@@ -2,10 +2,6 @@ import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 import '../models/estimates_model.dart';
 
 class AccordionEstimates extends StatefulWidget {

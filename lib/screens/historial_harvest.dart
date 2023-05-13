@@ -185,7 +185,7 @@ Widget _buildHarvest(BuildContext context, dynamic harvest, int index) {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          AddTreeForm(),
+                          AddTreeForm(treeIndex: index),
                     ),
                   );
                 },
