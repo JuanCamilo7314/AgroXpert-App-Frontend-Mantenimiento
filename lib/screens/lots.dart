@@ -49,7 +49,9 @@ class _LotsScreenState extends State<LotsScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: FloatingActionButton(
-                      onPressed: () => {print("Agregando nuevo")},
+                      onPressed: () => {
+                        Navigator.pushNamed(context, '/create_lot'),
+                      },
                       child: const Icon(Icons.add),
                     ),
                   ),

@@ -1,3 +1,4 @@
+import 'package:agroxpert/screens/create_lot.dart';
 import 'package:flutter/material.dart';
 import '../screens/estimates_production.dart';
 import '../screens/final_report.dart';
@@ -13,6 +14,8 @@ class Routes {
       case '/harvests':
         return MaterialPageRoute(builder: (_) => HarvestScreen());
       // Agrega más rutas aquí si es necesario
+      case '/create_lot':
+        return MaterialPageRoute(builder: (_) => const CreateLotScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

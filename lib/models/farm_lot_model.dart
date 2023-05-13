@@ -27,6 +27,17 @@ class FarmLotModel {
       averageFruitWeight: json['averageFruitWeight'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'nameLot': nameLot,
+      'numberTrees': numberTrees,
+      'treesAge': treesAge,
+      'productionDate': productionDate.toJson(),
+      'averageFruitWeight': averageFruitWeight,
+    };
+  }
 }
 
 class ProductionDate {
@@ -40,6 +51,13 @@ class ProductionDate {
       primary: Production.fromJson(json['primary']),
       secondary: Production.fromJson(json['secondary']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'primary': primary.toJson(),
+      'secondary': secondary.toJson(),
+    };
   }
 }
 
@@ -55,5 +73,12 @@ class Production {
       initial: DateTime.parse(json['initial']),
       theFinal: DateTime.parse(json['final']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'initial': initial.toIso8601String(),
+      'final': theFinal.toIso8601String(),
+    };
   }
 }
