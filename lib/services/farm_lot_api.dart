@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'dart:io';
 
@@ -13,4 +15,12 @@ Future<List<FarmLotModel>> getLots() async {
       dataInformation.map((e) => FarmLotModel.fromJson(e)).toList();
 
   return lots;
+}
+
+Future<bool> createLot(FarmLotModel lot) async {
+  final response = await dio.post(
+    'http://127.0.0.1:5000/farm-lot',
+    data: jsonEncode(lot.toJson()),
+  );
+  return true;
 }
