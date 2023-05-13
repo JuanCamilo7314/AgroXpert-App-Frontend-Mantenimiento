@@ -1,4 +1,4 @@
-import 'package:agroxpert/helpers/config_forms/create-lots/validations.dart';
+import 'package:agroxpert/helpers/config_forms/register-harvest/validations.dart';
 import 'package:agroxpert/models/InputModelForm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -9,30 +9,25 @@ InputModel nameLot(TextEditingController controller) {
     controller: controller,
     icon: FlutterIcons.edit_ant,
     validator: validateName,
+    enabled: false,
   );
 }
 
-InputModel numberTrees(TextEditingController controller) {
+InputModel harvestType(
+    TextEditingController controller, String? selectedOption) {
   return InputModel(
-    text: 'Número de árboles',
+    text: 'Tipo de cosecha',
     controller: controller,
     icon: FlutterIcons.tree_outline_mco,
-    validator: validateNumberTrees,
-  );
-}
-
-InputModel treesAge(TextEditingController controller) {
-  return InputModel(
-    text: 'Edad de los árboles',
-    controller: controller,
-    icon: FlutterIcons.tree_outline_mco,
-    validator: validateTreesAge,
+    validator: validateHarvestType,
+    selectedOption: selectedOption,
+    options: ['Primaria', 'Secundaria'],
   );
 }
 
 InputModel initialDate(TextEditingController controller) {
   return InputModel(
-      text: 'Fecha inicial',
+      text: 'Fecha inicial de evaluación',
       controller: controller,
       icon: FlutterIcons.calendar_edit_mco,
       validator: validateInitialDate);
@@ -40,17 +35,8 @@ InputModel initialDate(TextEditingController controller) {
 
 InputModel finalDate(TextEditingController controller) {
   return InputModel(
-      text: 'Fecha final',
+      text: 'Fecha final de evaluación',
       controller: controller,
       icon: FlutterIcons.calendar_edit_mco,
       validator: validateInitialDate);
-}
-
-InputModel averageFruitWeight(TextEditingController controller) {
-  return InputModel(
-    text: 'Peso promedio de fruto en gramos',
-    controller: controller,
-    icon: FlutterIcons.weight_gram_mco,
-    validator: validateAverageFruitWeight,
-  );
 }
