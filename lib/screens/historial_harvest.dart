@@ -6,12 +6,9 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
 import 'package:agroxpert/screens/final_report.dart';
 import 'package:agroxpert/widgets/graphs/graph_harvest_production.dart';
-<<<<<<< HEAD
 import 'package:agroxpert/screens/create_final_report.dart';
 
-=======
 import 'estimates_form.dart';
->>>>>>> dev
 import 'estimates_production.dart';
 
 void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
