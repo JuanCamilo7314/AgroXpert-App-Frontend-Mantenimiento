@@ -1,5 +1,6 @@
 import 'package:agroxpert/helpers/config_forms/create-lots/validations.dart';
 import 'package:agroxpert/models/farm_lot_model.dart';
+import 'package:agroxpert/services/farm_lot_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,6 +30,7 @@ class _CreateLotScreenState extends State<CreateLotScreen> {
   final _secondaryFinalDateController = TextEditingController();
   final _averageFruitWeightController = TextEditingController();
   final _dateComplement = ' 00:00:00.000';
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -102,9 +104,24 @@ class _CreateLotScreenState extends State<CreateLotScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: FloatingActionButton(
-                    onPressed: _saveLot,
-                    child: const Text('Crear'),
+                  child: Stack(
+                    children: [
+                      Container(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                            onPressed: _isLoading ? null : _saveLot,
+                            child: const Text('Crear'),
+                          )),
+                      if (_isLoading)
+                        Positioned.fill(
+                          child: Container(
+                            color: Colors.black.withOpacity(0.5),
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ),
               ],
@@ -115,7 +132,7 @@ class _CreateLotScreenState extends State<CreateLotScreen> {
     );
   }
 
-  _saveLot() {
+  Future<void> _saveLot() async {
     if (_formKey.currentState!.validate()) {
       ProductionDate productionDate = ProductionDate(
         primary: Production(
@@ -142,9 +159,29 @@ class _CreateLotScreenState extends State<CreateLotScreen> {
       //mostrar por consola el objeto lote creado
       print(lote.toJson());
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Lote creado con éxito')),
-      );
+      _isLoading = true;
+      var response = createLot(lote);
+
+      response.then((value) => {
+            //Si es verdadero se muestra el mensaje de éxito y vuleve la pantalla anterior
+            if (value == true)
+              {
+                _isLoading = false,
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Lote creado con éxito')),
+                ),
+                Navigator.pushReplacementNamed(context, '/lots')
+              }
+
+            //Si es falso se muestra el mensaje de error
+            else
+              {
+                _isLoading = false,
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Error al crear el lote')),
+                )
+              }
+          });
     }
   }
 }

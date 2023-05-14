@@ -46,7 +46,9 @@ class _CardLotState extends State<CardLot> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HistoricHarvest(farmLotId: widget.lot.id),
+                    builder: (context) => HistoricHarvest(
+                        farmLotId: widget.lot.id!,
+                        farmLotName: widget.lot.nameLot),
                   ),
                 ),
               },

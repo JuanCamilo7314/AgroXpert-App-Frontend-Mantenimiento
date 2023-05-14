@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:agroxpert/utils/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/services.dart';
@@ -13,21 +14,22 @@ Future getEstimatesVsProduction(
     "ids": idsEstimates,
   };
 
-  final responseEstimates = await dio
-      .post('http://127.0.0.1:5000/estimates-production/harvest', data: ids);
-  final responseProduction = await dio
-      .get('http://127.0.0.1:5000/final-production/$idFinalProduction');
+  final responseEstimates =
+      await dio.post('$baseUrl/estimates-production/harvest', data: ids);
+  final responseProduction =
+      await dio.get('$baseUrl/final-production/$idFinalProduction');
 
-  dynamic dataMaping = mapData(responseEstimates.data['data'], responseProduction.data['data']);
+  dynamic dataMaping =
+      mapData(responseEstimates.data['data'], responseProduction.data['data']);
 
   return dataMaping;
 }
 
-
-List<DataGraph> mapData(dynamic estimates, dynamic productionFinal){
+List<DataGraph> mapData(dynamic estimates, dynamic productionFinal) {
   List<DataGraph> dataGraph = [];
 
-  dataGraph.add(DataGraph('Producción Final', productionFinal['totalProduction']));
+  dataGraph
+      .add(DataGraph('Producción Final', productionFinal['totalProduction']));
 
   for (var estimate in estimates) {
     dataGraph.add(DataGraph(estimate['date'], estimate['totalProduction']));
@@ -41,5 +43,3 @@ class DataGraph {
   final String type;
   final int value;
 }
-
-
