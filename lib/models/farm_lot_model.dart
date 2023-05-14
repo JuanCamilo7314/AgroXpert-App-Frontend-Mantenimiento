@@ -2,7 +2,7 @@ import 'dart:core';
 import 'package:json_annotation/json_annotation.dart';
 
 class FarmLotModel {
-  String id;
+  String? id;
   String nameLot;
   int numberTrees;
   double treesAge;
@@ -10,7 +10,7 @@ class FarmLotModel {
   double averageFruitWeight;
 
   FarmLotModel(
-      {required this.id,
+      {this.id,
       required this.nameLot,
       required this.numberTrees,
       required this.treesAge,

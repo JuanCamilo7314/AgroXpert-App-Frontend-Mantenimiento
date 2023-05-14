@@ -1,26 +1,28 @@
 import 'dart:convert';
 
+import 'package:agroxpert/utils/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/services.dart';
 
 import '../models/farm_lot_model.dart';
 
-
 final dio = Dio();
 
-Future<List<EstimatesModel>> getEstimatesHarvest(List<String> idsEstimatesHarvest ) async {
+Future<List<EstimatesModel>> getEstimatesHarvest(
+    List<String> idsEstimatesHarvest) async {
   Map<String, dynamic> idsEstimates = {
     "ids": idsEstimatesHarvest,
   };
-  
-  final response = await dio.post('http://127.0.0.1:5000/estimates-production/harvest', data: idsEstimates);
+
+  final response = await dio.post('$baseUrl/estimates-production/harvest',
+      data: idsEstimates);
 
   List<EstimatesModel> estimates = [];
   for (var estimate in response.data['data']) {
     estimates.add(EstimatesModel.fromJson(estimate));
   }
-  
+
   return estimates;
 }
 
