@@ -32,7 +32,7 @@ Widget createDoubleInput(InputModel input) {
       controller: input.controller,
       decoration:
           InputDecoration(labelText: input.text, prefixIcon: Icon(input.icon)),
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
       //permitir solo numeros
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'^\d*\,?\.?\d*$')),
@@ -119,16 +119,22 @@ Widget createDateInput(InputModel input, BuildContext context) {
 }
 
 Widget createSelectInput(InputModel input, Function(String?) onChanged) {
-  return DropdownButton<String>(
-    isExpanded: true,
-    hint: Text(input.text),
-    value: input.selectedOption,
-    items: input.options?.map((String option) {
-      return DropdownMenuItem<String>(
-        value: option,
-        child: Text(option),
-      );
-    }).toList(),
-    onChanged: onChanged,
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(input.text),
+      DropdownButton<String>(
+        isExpanded: true,
+        hint: const Text("Seleccione una opción"),
+        value: input.selectedOption,
+        items: input.options?.map((String option) {
+          return DropdownMenuItem<String>(
+            value: option,
+            child: Text(option),
+          );
+        }).toList(),
+        onChanged: onChanged,
+      )
+    ],
   );
 }

@@ -63,3 +63,16 @@ String? validateAverageFruitWeight(String value) {
   }
   return null;
 }
+
+String? validateNumberFinalProduction(String value) {
+  int newValue = int.parse(value);
+  if (value.isEmpty) {
+    return 'El peso es requerido';
+  }
+
+  if (newValue < 0) {
+    return 'El peso debe ser mayor a 0';
+  }
+
+  return null;
+}

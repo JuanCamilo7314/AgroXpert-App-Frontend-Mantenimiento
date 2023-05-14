@@ -3,10 +3,10 @@ import 'dart:core';
 class FinalProductionModel {
   String id;
   DateTime date;
-  double totalProduction;
-  double exportMarket;
-  double nationalMarket;
-  double waste;
+  int totalProduction;
+  int exportMarket;
+  int nationalMarket;
+  int waste;
   List<CaliberDivision> caliberDivision;
   
 
@@ -31,11 +31,23 @@ class FinalProductionModel {
           json['caliberDivision'].map((x) => CaliberDivision.fromJson(x))),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'date': date.toIso8601String(),
+      'totalProduction': totalProduction,
+      'exportMarket': exportMarket,
+      'nationalMarket': nationalMarket,
+      'waste': waste,
+      'caliberDivision': caliberDivision.map((x) => x.toJson()).toList(),
+    };
+  }
 }
 
 class CaliberDivision {
   String category;
-  double quantity;
+  int quantity;
 
   CaliberDivision({required this.category, required this.quantity});
 
@@ -44,6 +56,13 @@ class CaliberDivision {
       category: json['category'],
       quantity: json['quantity'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'category': category,
+      'quantity': quantity,
+    };
   }
 }
 

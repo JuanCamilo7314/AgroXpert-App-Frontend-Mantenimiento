@@ -41,7 +41,7 @@ class _AddTreeFormState extends State<AddTreeForm> {
   }
 
   void _enviarPeticion() {
-    var response = createEstimation(widget.idLot, _trees);
+    var response = createEstimation(widget.idLot, widget.harvestIndex, _trees);
 
     response.then((value) => {
           //Si es verdadero se muestra el mensaje de éxito y vuleve la pantalla anterior

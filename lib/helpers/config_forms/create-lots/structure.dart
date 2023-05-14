@@ -40,7 +40,7 @@ InputModel initialDate(TextEditingController controller) {
 
 InputModel finalDate(TextEditingController controller) {
   return InputModel(
-      text: 'Fecha final',
+      text: 'Fecha Final',
       controller: controller,
       icon: FlutterIcons.calendar_edit_mco,
       validator: validateInitialDate);
