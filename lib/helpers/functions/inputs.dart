@@ -119,16 +119,22 @@ Widget createDateInput(InputModel input, BuildContext context) {
 }
 
 Widget createSelectInput(InputModel input, Function(String?) onChanged) {
-  return DropdownButton<String>(
-    isExpanded: true,
-    hint: Text(input.text),
-    value: input.selectedOption,
-    items: input.options?.map((String option) {
-      return DropdownMenuItem<String>(
-        value: option,
-        child: Text(option),
-      );
-    }).toList(),
-    onChanged: onChanged,
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(input.text),
+      DropdownButton<String>(
+        isExpanded: true,
+        hint: const Text("Seleccione una opción"),
+        value: input.selectedOption,
+        items: input.options?.map((String option) {
+          return DropdownMenuItem<String>(
+            value: option,
+            child: Text(option),
+          );
+        }).toList(),
+        onChanged: onChanged,
+      )
+    ],
   );
 }

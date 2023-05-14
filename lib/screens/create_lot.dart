@@ -106,15 +106,17 @@ class _CreateLotScreenState extends State<CreateLotScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Stack(
                     children: [
-                      FloatingActionButton(
-                        onPressed: _isLoading ? null : _saveLot,
-                        child: const Text('Crear'),
-                      ),
+                      Container(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                            onPressed: _isLoading ? null : _saveLot,
+                            child: const Text('Crear'),
+                          )),
                       if (_isLoading)
                         Positioned.fill(
                           child: Container(
                             color: Colors.black.withOpacity(0.5),
-                            child: Center(
+                            child: const Center(
                               child: CircularProgressIndicator(),
                             ),
                           ),
