@@ -30,7 +30,7 @@ Widget createDoubleInput(InputModel input) {
       controller: input.controller,
       decoration:
           InputDecoration(labelText: input.text, prefixIcon: Icon(input.icon)),
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
       //permitir solo numeros
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'^\d*\,?\.?\d*$')),

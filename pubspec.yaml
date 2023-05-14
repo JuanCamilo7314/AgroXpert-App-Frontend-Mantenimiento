@@ -37,10 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   json_annotation: ^4.8.0
   intl: ^0.17.0
-  flutter_icons: ^1.1.0
   dio: ^5.1.1
   fl_chart: ^0.62.0
   d_chart: ^2.2.11
+  flutter_icons: ^1.1.0
 
 dev_dependencies:
   flutter_test:
