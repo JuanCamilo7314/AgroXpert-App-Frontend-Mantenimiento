@@ -22,5 +22,9 @@ Future<bool> createLot(FarmLotModel lot) async {
     'http://127.0.0.1:5000/farm-lot',
     data: jsonEncode(lot.toJson()),
   );
+  // Validaciones de respuesta
+  if (response.statusCode != HttpStatus.ok) {
+    return response.data['success'];
+  }
   return true;
 }

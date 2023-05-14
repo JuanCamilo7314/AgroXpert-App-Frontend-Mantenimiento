@@ -1,3 +1,4 @@
+import 'package:agroxpert/screens/register_harvest.dart';
 import 'package:flutter/material.dart';
 import 'details_estimates.dart';
 import '../services/harvest_api.dart';
@@ -44,38 +45,61 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
             return const Text('Error al obtener los datos');
           } else if (snapshot.connectionState == ConnectionState.done) {
             final historialHarvest = snapshot.data as List<dynamic>;
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // Tabla
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Table(
-                      columnWidths: const {
-                        0: FlexColumnWidth(2),
-                        1: FlexColumnWidth(2),
-                        2: FlexColumnWidth(2),
-                      },
-                      border: TableBorder.all(width: 1.0),
-                      children: [
-                        _tableHeader(context),
-                        ..._builRowInfo(historialHarvest, context),
-                      ],
-                    ),
-                  ),
-                  const GraphHarvestProduction(),
+            return Stack(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Tabla
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Table(
+                          columnWidths: const {
+                            0: FlexColumnWidth(2),
+                            1: FlexColumnWidth(2),
+                            2: FlexColumnWidth(2),
+                          },
+                          border: TableBorder.all(width: 1.0),
+                          children: [
+                            _tableHeader(context),
+                            ..._builRowInfo(historialHarvest, context),
+                          ],
+                        ),
+                      ),
+                      const GraphHarvestProduction(),
 
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Acción que se ejecuta al pulsar el botón
-                      }, child: null,
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // Acción que se ejecuta al pulsar el botón
+                          },
+                          child: const Text('Estimar produccion'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: FloatingActionButton(
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                HarvestRegister(farmLotId: widget.farmLotId),
+                          ),
+                        ),
+                      },
+                      child: const Icon(Icons.add),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           } else {
             return const Center(
@@ -184,8 +208,7 @@ Widget _buildHarvest(BuildContext context, dynamic harvest, int index) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          AddTreeForm(treeIndex: index),
+                      builder: (context) => AddTreeForm(treeIndex: index),
                     ),
                   );
                 },
@@ -209,7 +232,6 @@ Widget _buildHarvest(BuildContext context, dynamic harvest, int index) {
     ),
   );
 }
-
 
 Widget _buildEstimates(dynamic estimates) {
   return TableCell(
