@@ -6,7 +6,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
 import 'package:agroxpert/screens/final_report.dart';
 import 'package:agroxpert/widgets/graphs/graph_harvest_production.dart';
-
+import 'estimates_form.dart';
 import 'estimates_production.dart';
 
 void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
@@ -159,7 +159,7 @@ List<TableRow> _builRowInfo(
     tableRows.add(
       TableRow(
         children: [
-          _buildHarvest(harvest['harvest'], index),
+          _buildHarvest(context, harvest['harvest'], index),
           _buildEstimates(harvest['estimates']),
           _buildFinalReport(harvest['finalProduction'],
               harvest['harvest']['estimates '], context),
@@ -171,30 +171,66 @@ List<TableRow> _builRowInfo(
   return tableRows;
 }
 
-Widget _buildHarvest(dynamic harvest, int index) {
+Widget _buildHarvest(BuildContext context, dynamic harvest, int index) {
   return TableCell(
-      child: Column(
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text('Cosecha $index', style: const TextStyle(fontSize: 16)),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          dateOnly(DateTime.parse(harvest['evaluationStartDate'])),
-          style: const TextStyle(fontSize: 16),
+    child: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('Cosecha $index', style: const TextStyle(fontSize: 16)),
         ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          dateOnly(DateTime.parse(harvest['evaluationEndDate'])),
-          style: const TextStyle(fontSize: 16),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            dateOnly(DateTime.parse(harvest['evaluationStartDate'])),
+            style: const TextStyle(fontSize: 16),
+          ),
         ),
-      ),
-    ],
-  ));
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            dateOnly(DateTime.parse(harvest['evaluationEndDate'])),
+            style: const TextStyle(fontSize: 16),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              const Expanded(
+                flex: 1,
+                child:
+                    Text('Agregar Estimación', style: TextStyle(fontSize: 16)),
+              ),
+              const SizedBox(width: 10),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddTreeForm(treeIndex: index),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 Widget _buildEstimates(dynamic estimates) {
