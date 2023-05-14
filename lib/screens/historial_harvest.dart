@@ -257,7 +257,6 @@ Widget _buildHarvest(BuildContext context, dynamic harvest, int index) {
 }
 
 Widget _buildEstimates(dynamic estimates) {
-<<<<<<< HEAD
   if (estimates == null) {
     return const TableCell(
       child: Padding(
@@ -270,9 +269,7 @@ Widget _buildEstimates(dynamic estimates) {
     );
   }
 
-=======
   bool hasData = estimates != null && estimates != [];
->>>>>>> dev
   return TableCell(
     child: hasData
         ? ListView.builder(
