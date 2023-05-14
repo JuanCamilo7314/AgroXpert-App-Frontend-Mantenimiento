@@ -246,77 +246,108 @@ Widget _buildHarvest(BuildContext context, dynamic harvest, int index) {
 }
 
 Widget _buildEstimates(dynamic estimates) {
+  bool hasData = estimates != null && estimates != [];
   return TableCell(
-    child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: estimates!.length ?? 0,
-        itemBuilder: (context, index) {
-          final estimate = estimates[index];
+    child: hasData
+        ? ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: estimates!.length ?? 0,
+            itemBuilder: (context, index) {
+              final estimate = estimates[index];
 
-          return Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 1.0,
-                ),
-              ),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Icon(FlutterIcons.calendar_ant, color: Colors.green),
-                    const SizedBox(width: 8),
-                    Text(dateOnly(DateTime.parse(estimate['date']))),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Icon(FlutterIcons.tree_ent, color: Colors.green),
-                    const SizedBox(width: 8),
-                    Text('${estimate['totalFruitsEstimates']} Frutos'),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Icon(FlutterIcons.boxes_faw5s, color: Colors.green),
-                    const SizedBox(width: 8),
-                    Text('${estimate['estimatedProduction']} Kg'),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EstimatesProductionScreen(
-                              estimate: estimate,
-                            ),
-                          ));
-                    },
-                    child: const Text('Ver detalle'),
+              return Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
                   ),
                 ),
-              ],
-            ),
-          );
-        }),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(FlutterIcons.calendar_ant,
+                            color: Colors.green),
+                        const SizedBox(width: 8),
+                        Text(dateOnly(DateTime.parse(estimate['date']))),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(FlutterIcons.tree_ent, color: Colors.green),
+                        const SizedBox(width: 8),
+                        Text('${estimate['totalFruitsEstimates']} Frutos'),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(FlutterIcons.boxes_faw5s,
+                            color: Colors.green),
+                        const SizedBox(width: 8),
+                        Text('${estimate['estimatedProduction']} Kg'),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EstimatesProductionScreen(
+                                  estimate: estimate,
+                                ),
+                              ));
+                        },
+                        child: const Text('Ver detalle'),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            })
+        : const Center(
+            child: Text("No hay estimaciones"),
+          ),
   );
 }
 
 Widget _buildFinalReport(
     dynamic finalReport, List<dynamic> idEstimates, BuildContext context) {
+  if (idEstimates == null || idEstimates.isEmpty) {
+    return const TableCell(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          'No hay estimaciones para reporte final',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  if (finalReport == null) {
+    return const TableCell(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          'No hay reporte final',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
   List<String> ids = idEstimates.map((element) => element.toString()).toList();
   return TableCell(
       child: Padding(
