@@ -109,7 +109,7 @@ class _CreateFinalReportScreen extends State<CreateFinalReportScreen> {
                 ),
                 const SizedBox(height: 16.0),
                 Text(
-                  'Lista de Divisiones por calibres',
+                  'Lista de calibres',
                   style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
