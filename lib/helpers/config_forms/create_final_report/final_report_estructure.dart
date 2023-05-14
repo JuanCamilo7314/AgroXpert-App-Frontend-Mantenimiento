@@ -46,3 +46,19 @@ InputModel waste(TextEditingController controller) {
       icon: FlutterIcons.trash_2_fea,
       validator: validateNumberFinalProduction);
 }
+
+InputModel category(TextEditingController controller) {
+  return InputModel(
+      text: 'Categoría',
+      controller: controller,
+      icon: FlutterIcons.type_fea,
+      validator: validateNumberFinalProduction);
+}
+
+InputModel quantity(TextEditingController controller) {
+  return InputModel(
+      text: 'Cantidad',
+      controller: controller,
+      icon: FlutterIcons.format_list_numbered_rtl_mco,
+      validator: validateNumberFinalProduction);
+}

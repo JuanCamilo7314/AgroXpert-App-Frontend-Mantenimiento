@@ -22,6 +22,26 @@ class _CreateFinalReportScreen extends State<CreateFinalReportScreen> {
   final _wasteController = TextEditingController();
   final _dateComplement = ' 00:00:00.000';
 
+  final _categoryController = TextEditingController();
+  final _quantiyController = TextEditingController();
+  final List<CaliberDivision> _calibersDivision = [];
+
+  void _addCaliberDivision() {
+    if (_formKey.currentState!.validate()) {
+      CaliberDivision caliberDivision = CaliberDivision(
+        category: _categoryController.text,
+        quantity: int.parse(_quantiyController.text),
+      );
+
+      setState(() {
+        _calibersDivision.add(caliberDivision);
+      });
+
+      _categoryController.clear();
+      _quantiyController.clear();
+    }
+  }
+
   @override
   void dispose() {
     _dateController.dispose();
@@ -48,11 +68,11 @@ class _CreateFinalReportScreen extends State<CreateFinalReportScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                // createDateInputForInit(
-                //   dateFinalProduction(_dateController),
-                //   _dateController,
-                //   context,
-                // ),
+                createDateInputForInit(
+                  dateFinalProduction(_dateController),
+                  _dateController,
+                  context,
+                ),
                 createIntegerInput(
                   totalProduction(_totalProductionController),
                 ),
@@ -65,6 +85,49 @@ class _CreateFinalReportScreen extends State<CreateFinalReportScreen> {
                 createIntegerInput(
                   waste(_wasteController),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'División por calibres',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey.shade700,
+                  ),
+                ),
+                createIntegerInput(
+                  category(_categoryController),
+                ),
+                createIntegerInput(
+                  quantity(_quantiyController),
+                ),
+                const SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: _addCaliberDivision,
+                  child: const Text('Agregar'),
+                ),
+                const SizedBox(height: 16.0),
+                Text(
+                  'Lista de Divisiones por calibres',
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueGrey.shade700),
+                ),
+                const SizedBox(height: 16.0),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: _calibersDivision.length,
+                  itemBuilder: (context, index) {
+                    CaliberDivision calibre = _calibersDivision[index];
+                    return ListTile(
+                      title: Text(
+                          'Arbol # ${index + 1}, Número de quartiles: ${calibre.category}, Número de frutas: ${calibre.quantity}'),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: FloatingActionButton(
@@ -88,7 +151,7 @@ class _CreateFinalReportScreen extends State<CreateFinalReportScreen> {
       exportMarket: int.parse(_exportMarketController.text),
       nationalMarket: int.parse(_nationalMarketController.text),
       waste: int.parse(_wasteController.text),
-      caliberDivision: List.empty(),
+      caliberDivision: _calibersDivision,
     );
 
     print(finalProduction.toJson());
