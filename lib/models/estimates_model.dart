@@ -12,7 +12,6 @@ class EstimatesModel {
   EstimatesModel(
       {required this.id,
       required this.date,
-
       required this.numberTrees,
       required this.totalFruitsEstimates,
       required this.averageFruits,
@@ -45,4 +44,9 @@ class TreesAssessed {
       numQuartiles: json['numQuartiles'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "numFruits": numFruits,
+        "numQuartiles": numQuartiles,
+      };
 }

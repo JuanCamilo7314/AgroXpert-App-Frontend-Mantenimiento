@@ -1,17 +1,15 @@
 import 'dart:math';
-
 import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/material.dart';
-
 import '../services/estimation_api.dart';
+import '../screens/historial_harvest.dart';
 
 class AddTreeForm extends StatefulWidget {
-  @override
-  final int harvestIndex;
-
+  final String harvestId;
   final String idLot;
-
-  const AddTreeForm({required this.harvestIndex, required this.idLot});
+  final String farmLotName;
+  const AddTreeForm(
+      {super.key, required this.harvestId, required this.idLot, required this.farmLotName});
 
   @override
   State<AddTreeForm> createState() => _AddTreeFormState();
@@ -32,8 +30,6 @@ class _AddTreeFormState extends State<AddTreeForm> {
       );
       setState(() {
         _trees.add(tree);
-        print(widget
-            .harvestIndex); // Imprime el valor de harvestIndex en la consola
       });
       _quartilesController.clear();
       _numeroFrutasController.clear();
@@ -41,19 +37,20 @@ class _AddTreeFormState extends State<AddTreeForm> {
   }
 
   void _enviarPeticion() {
-    var response = createEstimation(widget.idLot, widget.harvestIndex, _trees);
+    var response = createEstimation(widget.idLot, widget.harvestId, _trees);
 
     response.then((value) => {
-          //Si es verdadero se muestra el mensaje de éxito y vuleve la pantalla anterior
           if (value == true)
             {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Estimación creada con exito')),
               ),
-              Navigator.pushReplacementNamed(context, '/HarvestScreen')
+              Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HistoricHarvest(farmLotId: widget.idLot, farmLotName: widget.farmLotName),
+                        ),)
             }
-
-          //Si es falso se muestra el mensaje de error
           else
             {
               ScaffoldMessenger.of(context).showSnackBar(
