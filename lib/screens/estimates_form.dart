@@ -2,14 +2,17 @@ import 'dart:math';
 import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/material.dart';
 import '../services/estimation_api.dart';
-import '../screens/historial_harvest.dart';
+import '../screens/estimates_production.dart';
 
 class AddTreeForm extends StatefulWidget {
   final String harvestId;
   final String idLot;
   final String farmLotName;
   const AddTreeForm(
-      {super.key, required this.harvestId, required this.idLot, required this.farmLotName});
+      {super.key,
+      required this.harvestId,
+      required this.idLot,
+      required this.farmLotName});
 
   @override
   State<AddTreeForm> createState() => _AddTreeFormState();
@@ -40,16 +43,24 @@ class _AddTreeFormState extends State<AddTreeForm> {
     var response = createEstimation(widget.idLot, widget.harvestId, _trees);
 
     response.then((value) => {
-          if (value == true)
+          if (value['success'] == true)
             {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Estimación creada con exito')),
               ),
+              // Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) => HistoricHarvest(farmLotId: widget.idLot, farmLotName: widget.farmLotName),
+              //           ),)
+
               Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HistoricHarvest(farmLotId: widget.idLot, farmLotName: widget.farmLotName),
-                        ),)
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EstimatesProductionScreen(
+                      estimate: value['data'],
+                    ),
+                  ))
             }
           else
             {

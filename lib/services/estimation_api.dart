@@ -37,7 +37,7 @@ Future<List<FarmLotModel>> getLots() async {
   return lots;
 }
 
-Future<bool> createEstimation(String farmLotId, String idHarvest,
+Future<dynamic> createEstimation(String farmLotId, String idHarvest,
     List<TreesAssessed> treesAssessed) async {
   Map<String, dynamic> body = {
     "idFarm": farmLotId,
@@ -48,8 +48,5 @@ Future<bool> createEstimation(String farmLotId, String idHarvest,
   final response =
       await dio.post('http://127.0.0.1:5000/estimates-production', data: jsonEncode(body));
 
-  print(jsonEncode(body));
-  print(response.data);
-
-  return response.data['success'];
+  return response.data;
 }

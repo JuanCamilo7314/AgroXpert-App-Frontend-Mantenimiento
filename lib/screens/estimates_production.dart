@@ -28,7 +28,7 @@ class _EstimatesProductionScreen extends State<EstimatesProductionScreen> {
 Widget _content(dynamic estimate) {
   return Column(
     children: [
-      _fielDateEstimate(DateTime.parse(estimate['date'])),
+      _fielDateEstimate(estimate['date']),
       const SizedBox(height: 10),
       _fieldNumTrees(estimate['numTrees']),
       const SizedBox(height: 10),
@@ -43,7 +43,7 @@ Widget _content(dynamic estimate) {
   );
 }
 
-Widget _fielDateEstimate(DateTime date) {
+Widget _fielDateEstimate(String date) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
@@ -51,7 +51,7 @@ Widget _fielDateEstimate(DateTime date) {
       const SizedBox(width: 8),
       const Text('Fecha de estimación: ',
           style: TextStyle(fontWeight: FontWeight.bold)),
-      Text(dateOnly(date)),
+      Text(date.substring(0, 11)),
     ],
   );
 }
