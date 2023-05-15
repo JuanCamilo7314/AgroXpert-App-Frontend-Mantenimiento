@@ -73,7 +73,8 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
                                 border: TableBorder.all(width: 1.0),
                                 children: [
                                   _tableHeader(context),
-                                  ..._builRowInfo(historialHarvest, context),
+                                  ..._builRowInfo(historialHarvest, context,
+                                      widget.farmLotId, widget.farmLotName),
                                 ],
                               ),
                             ),
@@ -163,8 +164,8 @@ TableRow _tableHeader(BuildContext context) {
   );
 }
 
-List<TableRow> _builRowInfo(
-    List<dynamic> historialHarvest, BuildContext context) {
+List<TableRow> _builRowInfo(List<dynamic> historialHarvest,
+    BuildContext context, String farmLotId, String farmLotName) {
   List<TableRow> tableRows = [];
   int index = 0;
   String harvestId = '';
@@ -181,8 +182,13 @@ List<TableRow> _builRowInfo(
         children: [
           _buildHarvest(context, harvest['harvest'], index),
           _buildEstimates(harvest['estimates']),
-          _buildFinalReport(harvest['finalProduction'],
-              harvest['harvest']['estimates '], harvestId, context),
+          _buildFinalReport(
+              harvest['finalProduction'],
+              harvest['harvest']['estimates '],
+              harvestId,
+              context,
+              farmLotId,
+              farmLotName),
         ],
       ),
     );
@@ -342,8 +348,13 @@ Widget _buildEstimates(dynamic estimates) {
   );
 }
 
-Widget _buildFinalReport(dynamic finalReport, List<dynamic> idEstimates,
-    String harvestId, BuildContext context) {
+Widget _buildFinalReport(
+    dynamic finalReport,
+    List<dynamic> idEstimates,
+    String harvestId,
+    BuildContext context,
+    String farmLotId,
+    String farmLotName) {
   if (finalReport == null || idEstimates == null) {
     return TableCell(
         child: Column(
@@ -362,7 +373,10 @@ Widget _buildFinalReport(dynamic finalReport, List<dynamic> idEstimates,
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CreateFinalReportScreen( harvetsId:  harvestId),
+                    builder: (context) => CreateFinalReportScreen(
+                        harvetsId: harvestId,
+                        farmLotId: farmLotId,
+                        farmLotName: farmLotName),
                   ));
             },
             child: const Text(
