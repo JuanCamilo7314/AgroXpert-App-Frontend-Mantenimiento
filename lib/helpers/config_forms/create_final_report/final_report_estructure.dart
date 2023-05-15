@@ -1,4 +1,4 @@
-import 'package:agroxpert/helpers/config_forms/create-lots/validations.dart';
+import 'package:agroxpert/helpers/config_forms/create_final_report/validations.dart';
 import 'package:agroxpert/models/InputModelForm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -8,17 +8,17 @@ InputModel dateFinalProduction(TextEditingController controller) {
     text: 'Fecha final de producción',
     controller: controller,
     icon: FlutterIcons.calendar_edit_mco,
-    validator: validateInitialDate,
+    validator: validateFinalDate,
   );
 }
 
 // falta validacion
 InputModel totalProduction(TextEditingController controller) {
   return InputModel(
-    text: 'Producción total en kilogramos', 
+    text: 'Producción total en kilogramos',
     controller: controller,
-    icon: FlutterIcons.weight_gram_mco,
-    validator: validateNumberFinalProduction,
+    icon: FlutterIcons.weight_kilogram_mco,
+    validator: validateTotalProduction,
   );
 }
 
@@ -27,7 +27,7 @@ InputModel exportMarket(TextEditingController controller) {
     text: 'Total exportado en kilogramos',
     controller: controller,
     icon: FlutterIcons.earth_ant,
-    validator: validateNumberFinalProduction,
+    validator: validateExportMarket,
   );
 }
 
@@ -36,7 +36,7 @@ InputModel nationalMarket(TextEditingController controller) {
       text: 'Total mercado nacional en kilogramos',
       controller: controller,
       icon: FlutterIcons.earth_mco,
-      validator: validateNumberFinalProduction);
+      validator: validateNationalMarket);
 }
 
 InputModel waste(TextEditingController controller) {
@@ -44,5 +44,21 @@ InputModel waste(TextEditingController controller) {
       text: 'Total de desechado en kilogramos',
       controller: controller,
       icon: FlutterIcons.trash_2_fea,
-      validator: validateNumberFinalProduction);
+      validator: validateWaste);
+}
+
+InputModel category(TextEditingController controller) {
+  return InputModel(
+      text: 'Categoría',
+      controller: controller,
+      icon: FlutterIcons.type_fea,
+      validator: validateCategory);
+}
+
+InputModel quantity(TextEditingController controller) {
+  return InputModel(
+      text: 'Cantidad',
+      controller: controller,
+      icon: FlutterIcons.format_list_numbered_rtl_mco,
+      validator: validateQuantity);
 }

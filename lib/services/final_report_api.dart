@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:agroxpert/utils/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:agroxpert/models/final_production_model.dart';
@@ -10,4 +13,24 @@ Future<FinalProductionModel> getFinalReportProduction(idFinalProduction) async {
   Map<String, dynamic> dataInformation = response.data['data'];
   final finalProduction = FinalProductionModel.fromJson(dataInformation);
   return finalProduction;
+}
+
+Future<bool> createFinalProduction(
+    FinalProductionModel finalProduction, String idHarvest) async {
+  print(jsonEncode(finalProduction.toJson()));
+  try {
+    final response = await dio.post(
+      '$baseUrl/final-production/$idHarvest',
+      data: jsonEncode(finalProduction.toJson()),
+    );
+
+    print(response);
+    // Validaciones de respuesta
+    if (response.statusCode == HttpStatus.created) {
+      return response.data['success'];
+    }
+    return false;
+  } catch (e) {
+    return false;
+  }
 }

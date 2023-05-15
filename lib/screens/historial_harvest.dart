@@ -73,7 +73,8 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
                                 border: TableBorder.all(width: 1.0),
                                 children: [
                                   _tableHeader(context),
-                                  ..._builRowInfo(historialHarvest, widget.farmLotId, context),
+                                  ..._builRowInfo(historialHarvest, context,
+                                      widget.farmLotId, widget.farmLotName),
                                 ],
                               ),
                             ),
@@ -163,8 +164,8 @@ TableRow _tableHeader(BuildContext context) {
   );
 }
 
-List<TableRow> _builRowInfo(
-    List<dynamic> historialHarvest, String idLot ,BuildContext context) {
+List<TableRow> _builRowInfo(List<dynamic> historialHarvest,
+    BuildContext context, String farmLotId, String farmLotName) {
   List<TableRow> tableRows = [];
   int index = 0;
   String harvestId = '';
@@ -179,10 +180,15 @@ List<TableRow> _builRowInfo(
     tableRows.add(
       TableRow(
         children: [
-          _buildHarvest(context, harvest['harvest'], idLot , index),
+          _buildHarvest(context, harvest['harvest'], farmLotId, index),
           _buildEstimates(harvest['estimates']),
-          _buildFinalReport(harvest['finalProduction'],
-              harvest['harvest']['estimates '], harvestId, context),
+          _buildFinalReport(
+              harvest['finalProduction'],
+              harvest['harvest']['estimates '],
+              harvestId,
+              context,
+              farmLotId,
+              farmLotName),
         ],
       ),
     );
@@ -191,7 +197,8 @@ List<TableRow> _builRowInfo(
   return tableRows;
 }
 
-Widget _buildHarvest(BuildContext context, dynamic harvest, String idFarmLot, int index) {
+Widget _buildHarvest(
+    BuildContext context, dynamic harvest, String idFarmLot, int index) {
   return TableCell(
     child: Column(
       children: [
@@ -228,7 +235,8 @@ Widget _buildHarvest(BuildContext context, dynamic harvest, String idFarmLot, in
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddTreeForm(idLot: idFarmLot ,harvestIndex: index),
+                      builder: (context) =>
+                          AddTreeForm(idLot: idFarmLot, harvestIndex: index),
                     ),
                   );
                 },
@@ -342,8 +350,13 @@ Widget _buildEstimates(dynamic estimates) {
   );
 }
 
-Widget _buildFinalReport(dynamic finalReport, List<dynamic> idEstimates,
-    String harvestId, BuildContext context) {
+Widget _buildFinalReport(
+    dynamic finalReport,
+    List<dynamic> idEstimates,
+    String harvestId,
+    BuildContext context,
+    String farmLotId,
+    String farmLotName) {
   if (finalReport == null || idEstimates == null) {
     return TableCell(
         child: Column(
@@ -362,7 +375,10 @@ Widget _buildFinalReport(dynamic finalReport, List<dynamic> idEstimates,
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CreateFinalReportScreen( harvetsId:  harvestId),
+                    builder: (context) => CreateFinalReportScreen(
+                        harvetsId: harvestId,
+                        farmLotId: farmLotId,
+                        farmLotName: farmLotName),
                   ));
             },
             child: const Text(
