@@ -69,7 +69,7 @@ class _CreateCaliberDivisionState extends State<CreateCaliberDivision> {
               CaliberDivision calibre = widget.caliberDivision[index];
               return ListTile(
                 title: Text(
-                    'Arbol # ${index + 1}, Categoría: ${calibre.category}, Número de frutas: ${calibre.quantity}'),
+                    'Arbol # ${index + 1}, Categoría: ${calibre.category}, Cantidad: ${calibre.quantity}'),
               );
             },
           ),

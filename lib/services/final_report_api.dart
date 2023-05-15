@@ -17,13 +17,16 @@ Future<FinalProductionModel> getFinalReportProduction(idFinalProduction) async {
 
 Future<bool> createFinalProduction(
     FinalProductionModel finalProduction, String idHarvest) async {
+  print(jsonEncode(finalProduction.toJson()));
   try {
     final response = await dio.post(
       '$baseUrl/final-production/$idHarvest',
       data: jsonEncode(finalProduction.toJson()),
     );
+
+    print(response);
     // Validaciones de respuesta
-    if (response.statusCode == HttpStatus.ok) {
+    if (response.statusCode == HttpStatus.created) {
       return response.data['success'];
     }
     return false;

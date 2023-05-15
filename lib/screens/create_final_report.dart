@@ -108,7 +108,7 @@ class _CreateFinalReportScreen extends State<CreateFinalReportScreen> {
         caliberDivision: _calibersDivision,
       );
 
-      print(finalProduction.toJson());
+      //print(finalProduction.toJson());
 
       var request = createFinalProduction(finalProduction, widget.harvetsId);
 

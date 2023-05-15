@@ -157,7 +157,7 @@ class _CreateLotScreenState extends State<CreateLotScreen> {
       // Aquí se puede hacer lo que sea necesario con el objeto lote creado, como enviarlo a una base de datos, etc.
 
       //mostrar por consola el objeto lote creado
-      print(lote.toJson());
+      //print(lote.toJson());
 
       _isLoading = true;
       var response = createLot(lote);
