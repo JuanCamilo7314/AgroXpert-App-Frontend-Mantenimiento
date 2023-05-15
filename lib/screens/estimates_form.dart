@@ -1,11 +1,17 @@
+import 'dart:math';
+
 import 'package:agroxpert/models/estimates_model.dart';
 import 'package:flutter/material.dart';
 
+import '../services/estimation_api.dart';
+
 class AddTreeForm extends StatefulWidget {
   @override
-  final int treeIndex;
+  final int harvestIndex;
 
-  const AddTreeForm({required this.treeIndex});
+  final String idLot;
+
+  const AddTreeForm({required this.harvestIndex, required this.idLot});
 
   @override
   State<AddTreeForm> createState() => _AddTreeFormState();
@@ -26,15 +32,41 @@ class _AddTreeFormState extends State<AddTreeForm> {
       );
       setState(() {
         _trees.add(tree);
-        print(widget.treeIndex); // Imprime el valor de treeIndex en la consola
+        print(widget
+            .harvestIndex); // Imprime el valor de harvestIndex en la consola
       });
       _quartilesController.clear();
       _numeroFrutasController.clear();
     }
   }
 
+  void _enviarPeticion() {
+    var response = createEstimation(widget.idLot, widget.harvestIndex, _trees);
+
+    response.then((value) => {
+          //Si es verdadero se muestra el mensaje de éxito y vuleve la pantalla anterior
+          if (value == true)
+            {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Estimación creada con exito')),
+              ),
+              Navigator.pushReplacementNamed(context, '/HarvestScreen')
+            }
+
+          //Si es falso se muestra el mensaje de error
+          else
+            {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Error al crear el estimación')),
+              )
+            }
+        });
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Agregar árbol'),
@@ -55,6 +87,10 @@ class _AddTreeFormState extends State<AddTreeForm> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Por favor ingresa el número de quartiles';
+                  } else if (!RegExp(r'^\d+$').hasMatch(value)) {
+                    return 'El número de quartiles debe contener solo números';
+                  } else if (int.parse(value) <= 0 || int.parse(value) > 4) {
+                    return 'El número de quartiles debe ser mayor a 0 y menor o igual a 4';
                   }
                   return null;
                 },
@@ -69,6 +105,9 @@ class _AddTreeFormState extends State<AddTreeForm> {
                   if (value!.isEmpty) {
                     return 'Por favor ingresa el número de frutas';
                   }
+                  if (int.tryParse(value) == null) {
+                    return 'Ingresa un número válido';
+                  }
                   return null;
                 },
               ),
@@ -76,6 +115,11 @@ class _AddTreeFormState extends State<AddTreeForm> {
               ElevatedButton(
                 onPressed: _agregarArbol,
                 child: const Text('Agregar'),
+              ),
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: _enviarPeticion,
+                child: const Text('Guardar Cambios'),
               ),
               const SizedBox(height: 16.0),
               const Text(

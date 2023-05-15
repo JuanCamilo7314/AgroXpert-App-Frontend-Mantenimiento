@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:html';
 import 'package:agroxpert/utils/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:agroxpert/models/estimates_model.dart';
@@ -35,4 +35,21 @@ Future<List<FarmLotModel>> getLots() async {
       .map<FarmLotModel>((json) => FarmLotModel.fromJson(json))
       .toList();
   return lots;
+}
+
+Future<bool> createEstimation(
+    String farmLotId, int idHarvest, List<TreesAssessed> treesAssessed) async {
+  Map<String, dynamic> body = {
+    "idFarm": farmLotId,
+    "idHarvest": idHarvest,
+    "treesAssessed": treesAssessed
+  };
+
+  final response =
+      await dio.post('http://127.0.0.1:5000/estimates-production', data: body);
+  // Validaciones de respuesta
+  if (response.statusCode != HttpStatus.ok) {
+    return response.data['success'];
+  }
+  return true;
 }

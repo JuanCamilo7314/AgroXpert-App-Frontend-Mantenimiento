@@ -180,7 +180,7 @@ List<TableRow> _builRowInfo(List<dynamic> historialHarvest,
     tableRows.add(
       TableRow(
         children: [
-          _buildHarvest(context, harvest['harvest'], index),
+          _buildHarvest(context, harvest['harvest'], farmLotId, index),
           _buildEstimates(harvest['estimates']),
           _buildFinalReport(
               harvest['finalProduction'],
@@ -197,7 +197,8 @@ List<TableRow> _builRowInfo(List<dynamic> historialHarvest,
   return tableRows;
 }
 
-Widget _buildHarvest(BuildContext context, dynamic harvest, int index) {
+Widget _buildHarvest(
+    BuildContext context, dynamic harvest, String idFarmLot, int index) {
   return TableCell(
     child: Column(
       children: [
@@ -234,7 +235,8 @@ Widget _buildHarvest(BuildContext context, dynamic harvest, int index) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddTreeForm(treeIndex: index),
+                      builder: (context) =>
+                          AddTreeForm(idLot: idFarmLot, harvestIndex: index),
                     ),
                   );
                 },
