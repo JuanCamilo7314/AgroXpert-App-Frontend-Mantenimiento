@@ -20,6 +20,19 @@ class FinalProductionModel {
       required this.caliberDivision});
 
   factory FinalProductionModel.fromJson(Map<String, dynamic> json) {
+    
+    if (json['caliberDivision'] == null) {
+      return FinalProductionModel(
+        id: json['id'],
+        date: DateTime.now(),
+        totalProduction: json['totalProduction'],
+        exportMarket: json['exportMarket'],
+        nationalMarket: json['nationalMarket'],
+        waste: json['waste'],
+        caliberDivision: [],
+      );
+    }
+
     return FinalProductionModel(
       id: json['id'],
       date: DateTime.parse(json['date']),
@@ -27,8 +40,7 @@ class FinalProductionModel {
       exportMarket: json['exportMarket'],
       nationalMarket: json['nationalMarket'],
       waste: json['waste'],
-      caliberDivision: List<CaliberDivision>.from(
-          json['caliberDivision'].map((x) => CaliberDivision.fromJson(x))),
+      caliberDivision: json['caliberDivision'].map<CaliberDivision>((x) => CaliberDivision.fromJson(x)).toList(),
     );
   }
 

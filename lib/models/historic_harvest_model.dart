@@ -30,10 +30,20 @@ class HistoricHarvestModel {
       idFarmLot: json['idFarmLot'],
       evaluationStartDate: DateTime.parse(json['evaluationStartDate']),
       evaluationEndDate: DateTime.parse(json['evaluationEndDate']),
-      estimates: List<EstimatesModel>.from(
-          json['estimates'].map((x) => EstimatesModel.fromJson(x))),
+      estimates: mapEstimates(json['estimates']),
       summaryFinalProduction:
           FinalProductionModel.fromJson(json['summaryFinalProduction']),
     );
   }
+
+  static List <EstimatesModel> mapEstimates(List<dynamic> estimates) {
+    List<EstimatesModel> estimatesList = [];
+    for (var element in estimates) {
+      estimatesList.add(EstimatesModel.fromJson(element));
+    }
+
+    return estimatesList;
+  }
+
+  
 }
