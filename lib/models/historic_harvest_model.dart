@@ -5,30 +5,35 @@ import 'package:agroxpert/models/final_production_model.dart';
 import 'package:agroxpert/models/harvest_model.dart';
 
 class HistoricHarvestModel {
-  Harvest harvest;
+  String id;
+  String type;
+  String idFarmLot;
+  DateTime evaluationStartDate;
+  DateTime evaluationEndDate;
   List<EstimatesModel> estimates;
-  FinalProductionModel finalProduction;
+  FinalProductionModel summaryFinalProduction;
 
   HistoricHarvestModel({
-    required this.harvest,
+    required this.id,
+    required this.type,
+    required this.idFarmLot,
+    required this.evaluationStartDate,
+    required this.evaluationEndDate,
     required this.estimates,
-    required this.finalProduction,
+    required this.summaryFinalProduction,
   });
 
   factory HistoricHarvestModel.fromJson(Map<String, dynamic> json) {
-    Harvest newHarvest = Harvest.fromJson(json['harvest']);
-
-    FinalProductionModel newFinalProduction =
-        FinalProductionModel.fromJson(json['finalProduction']);
-
-    List<dynamic> estimatesJson = json['estimates'];
-    List<EstimatesModel> newsEstiamtes =
-        estimatesJson.map((json) => EstimatesModel.fromJson(json)).toList();
-
     return HistoricHarvestModel(
-      harvest: newHarvest,
-      finalProduction: newFinalProduction,
-      estimates: newsEstiamtes,
+      id: json['id'],
+      type: json['type'],
+      idFarmLot: json['idFarmLot'],
+      evaluationStartDate: DateTime.parse(json['evaluationStartDate']),
+      evaluationEndDate: DateTime.parse(json['evaluationEndDate']),
+      estimates: List<EstimatesModel>.from(
+          json['estimates'].map((x) => EstimatesModel.fromJson(x))),
+      summaryFinalProduction:
+          FinalProductionModel.fromJson(json['summaryFinalProduction']),
     );
   }
 }

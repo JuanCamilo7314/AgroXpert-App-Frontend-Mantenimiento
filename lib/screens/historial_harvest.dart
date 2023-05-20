@@ -176,19 +176,14 @@ List<TableRow> _builRowInfo(List<dynamic> historialHarvest,
 
   for (var harvest in historialHarvest) {
     index++;
-    harvestId = harvest['harvest']['id'];
+    harvestId = harvest['id'];
     tableRows.add(
       TableRow(
         children: [
-          _buildHarvest(context, harvest['harvest'], farmLotId, index),
+          _buildHarvest(context, harvest, farmLotId, index),
           _buildEstimates(harvest['estimates']),
-          _buildFinalReport(
-              harvest['finalProduction'],
-              harvest['harvest']['estimates '],
-              harvestId,
-              context,
-              farmLotId,
-              farmLotName),
+          _buildFinalReport(harvest['summaryFinalProduction'],
+              harvest['estimates'], harvestId, context, farmLotId, farmLotName),
         ],
       ),
     );
@@ -352,12 +347,12 @@ Widget _buildEstimates(dynamic estimates) {
 
 Widget _buildFinalReport(
     dynamic finalReport,
-    List<dynamic> idEstimates,
+    List<dynamic> estimates,
     String harvestId,
     BuildContext context,
     String farmLotId,
     String farmLotName) {
-  if (finalReport == null || idEstimates == null) {
+  if (finalReport == null || estimates.isEmpty) {
     return TableCell(
         child: Column(
       children: [
@@ -391,7 +386,7 @@ Widget _buildFinalReport(
     ));
   }
 
-  List<String> ids = idEstimates.map((element) => element.toString()).toList();
+  List<String> ids = estimates.map((element) => element.id.toString()).toList();
   return TableCell(
       child: Padding(
     padding: const EdgeInsets.all(8.0),

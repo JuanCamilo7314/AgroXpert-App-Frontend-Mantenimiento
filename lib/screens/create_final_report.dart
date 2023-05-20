@@ -120,13 +120,7 @@ class _CreateFinalReportScreen extends State<CreateFinalReportScreen> {
                   const SnackBar(
                       content: Text('Reporte final creado con éxito')),
                 ),
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HistoricHarvest(
-                              farmLotId: widget.harvetsId,
-                              farmLotName: widget.farmLotName,
-                            )))
+                Navigator.pop(context)
               }
 
             //Si es falso se muestra el mensaje de error
