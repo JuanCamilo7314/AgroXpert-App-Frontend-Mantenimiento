@@ -52,7 +52,7 @@ class _AddTreeFormState extends State<AddTreeForm> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => EstimatesProductionScreen(
-                      estimate: value['data'],
+                      estimate: EstimatesModel.fromJson(value['data']),
                     ),
                   ))
             }
