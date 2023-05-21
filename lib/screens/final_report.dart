@@ -9,7 +9,8 @@ import '../models/final_production_model.dart';
 class FinalReportScreen extends StatefulWidget {
   final List<String> idEstimates;
   final String idFinalProduction;
-  const FinalReportScreen({super.key, required this.idEstimates, required this.idFinalProduction});
+  const FinalReportScreen(
+      {super.key, required this.idEstimates, required this.idFinalProduction});
 
   @override
   State<FinalReportScreen> createState() => _FinalReportScreen();
@@ -29,27 +30,30 @@ class _FinalReportScreen extends State<FinalReportScreen> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 final estimates = snapshot.data as List<EstimatesModel>;
-                return Column(
-                  children: estimates
-                      .asMap()
-                      .map((index, estimate) => MapEntry(
-                            index,
-                            AccordionEstimates(
-                              estimate: estimate,
-                              index: index + 1,
-                            ),
-                          ))
-                      .values
-                      .toList(),
-                );
+                if (estimates != null) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: estimates.length,
+                    itemBuilder: (context, index) {
+                      return AccordionEstimates(
+                        estimate: estimates[index],
+                        index: index + 1,
+                      );
+                    },
+                  ); 
+                }
+
+                return const Text('');
               } else {
                 return const CircularProgressIndicator();
               }
             },
           ),
           AccordionFinalProduction(idFinalProduction: widget.idFinalProduction),
-          AccordionBarGraph(idEstimates: widget.idEstimates, idFinalProduction: widget.idFinalProduction),
-          //const BarChart(),
+          AccordionBarGraph(
+              idEstimates: widget.idEstimates,
+              idFinalProduction: widget.idFinalProduction),
         ])));
   }
 }

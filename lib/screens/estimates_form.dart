@@ -32,8 +32,6 @@ class _AddTreeFormState extends State<AddTreeForm> {
       );
       setState(() {
         _trees.add(tree);
-        print(widget
-            .harvestIndex); // Imprime el valor de harvestIndex en la consola
       });
       _quartilesController.clear();
       _numeroFrutasController.clear();

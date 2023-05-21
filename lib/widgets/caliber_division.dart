@@ -79,9 +79,7 @@ class _CreateCaliberDivisionState extends State<CreateCaliberDivision> {
   }
 
   void _addCaliberDivision() {
-    print('add caliber division');
     if (_formKey.currentState!.validate()) {
-      print('add caliber division after validation');
       CaliberDivision caliberDivision = CaliberDivision(
         category: _categoryController.text,
         quantity: int.parse(_quantiyController.text),

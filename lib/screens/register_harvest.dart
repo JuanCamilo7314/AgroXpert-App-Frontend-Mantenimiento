@@ -112,8 +112,6 @@ class _HarvestRegisterState extends State<HarvestRegister> {
           evaluationEndDate: DateTime.parse(
               _evaluationEndDateController.text + _dateComplement));
 
-      //print(newHarvest.toJson());
-
       _isLoading = true;
       var response = createHarvest(newHarvest);
 

@@ -4,7 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:agroxpert/utils/date_convert.dart';
 
 class EstimatesProductionScreen extends StatefulWidget {
-  final dynamic estimate;
+  final EstimatesModel estimate;
   const EstimatesProductionScreen({super.key, required this.estimate});
 
   @override
@@ -25,20 +25,20 @@ class _EstimatesProductionScreen extends State<EstimatesProductionScreen> {
   }
 }
 
-Widget _content(dynamic estimate) {
+Widget _content(EstimatesModel estimate) {
   return Column(
     children: [
-      _fielDateEstimate(DateTime.parse(estimate['date'])),
+      _fielDateEstimate(estimate.date),
       const SizedBox(height: 10),
-      _fieldNumTrees(estimate['numTrees']),
+      _fieldNumTrees(estimate.numberTrees),
       const SizedBox(height: 10),
-      _fieldTotalFruitsEstimates(estimate['totalFruitsEstimates']),
+      _fieldTotalFruitsEstimates(estimate.totalFruitsEstimates),
       const SizedBox(height: 10),
-      _fieldAverageFruits(estimate['averageFruits']),
+      _fieldAverageFruits(estimate.averageFruits),
       const SizedBox(height: 10),
-      _fieldEstimatedProduction(estimate['estimatedProduction']),
+      _fieldEstimatedProduction(estimate.estimatedProduction),
       const SizedBox(height: 20),
-      _tableEstimatesTrees(estimate['treesAssessed']),
+      _tableEstimatesTrees(estimate.treesAssessed),
     ],
   );
 }
@@ -108,7 +108,7 @@ Widget _fieldEstimatedProduction(double estimatedProduction) {
   );
 }
 
-Widget _tableEstimatesTrees(dynamic treesAssessed) {
+Widget _tableEstimatesTrees(List<TreesAssessed> treesAssessed) {
   int index = 1;
   return Table(
     border: TableBorder.all(
@@ -166,7 +166,7 @@ Widget _tableEstimatesTrees(dynamic treesAssessed) {
           ),
         ],
       ),
-      for (dynamic treeAssessed in treesAssessed)
+      for (TreesAssessed treeAssessed in treesAssessed)
         TableRow(
           children: [
             TableCell(
@@ -181,14 +181,14 @@ Widget _tableEstimatesTrees(dynamic treesAssessed) {
                 child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                '${treeAssessed['numFruits']}',
+                '${treeAssessed.numFruits}',
               ),
             )),
             TableCell(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  '${treeAssessed['numQuartiles']}',
+                  '${treeAssessed.numQuartiles}',
                 ),
               ),
             ),

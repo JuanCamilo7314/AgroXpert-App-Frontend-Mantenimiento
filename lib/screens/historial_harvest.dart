@@ -1,3 +1,5 @@
+import 'package:agroxpert/models/estimates_model.dart';
+import 'package:agroxpert/models/final_production_model.dart';
 import 'package:agroxpert/screens/register_harvest.dart';
 import 'package:flutter/material.dart';
 import 'details_estimates.dart';
@@ -47,15 +49,18 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            print(snapshot.error);
             return const Text('Error al obtener los datos');
           } else if (snapshot.connectionState == ConnectionState.done) {
             bool hasData = false;
-            final List<HistoricHarvestModel> historialHarvest= [];
+            late List<HistoricHarvestModel> historialHarvest= [];
             if (snapshot.data != null && snapshot.data != []) {
-              final historialHarvest = snapshot.data as List<HistoricHarvestModel>;
-              hasData = true;
+              historialHarvest = snapshot.data as List<HistoricHarvestModel>;
+
+              if (historialHarvest.isNotEmpty){
+                hasData = true;
+              }
             }
+
             return Stack(
               children: [
                 hasData
@@ -166,26 +171,20 @@ TableRow _tableHeader(BuildContext context) {
   );
 }
 
-List<TableRow> _builRowInfo(List<dynamic> historialHarvest,
+List<TableRow> _builRowInfo(List<HistoricHarvestModel> historialHarvest,
     BuildContext context, String farmLotId, String farmLotName) {
   List<TableRow> tableRows = [];
   int index = 0;
-  String harvestId = '';
-
-  if (historialHarvest == null) {
-    return tableRows;
-  }
 
   for (var harvest in historialHarvest) {
     index++;
-    harvestId = harvest['id'];
     tableRows.add(
       TableRow(
         children: [
           _buildHarvest(context, harvest, farmLotId, index),
-          _buildEstimates(harvest['estimates']),
-          _buildFinalReport(harvest['summaryFinalProduction'],
-              harvest['estimates'], harvestId, context, farmLotId, farmLotName),
+          _buildEstimates(harvest.estimates),
+          _buildFinalReport(harvest.summaryFinalProduction,
+              harvest.estimates, harvest.id, context, farmLotId, farmLotName),
         ],
       ),
     );
@@ -195,7 +194,7 @@ List<TableRow> _builRowInfo(List<dynamic> historialHarvest,
 }
 
 Widget _buildHarvest(
-    BuildContext context, dynamic harvest, String idFarmLot, int index) {
+    BuildContext context, HistoricHarvestModel harvest, String idFarmLot, int index) {
   return TableCell(
     child: Column(
       children: [
@@ -206,14 +205,14 @@ Widget _buildHarvest(
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            dateOnly(DateTime.parse(harvest['evaluationStartDate'])),
+            dateOnly(harvest.evaluationStartDate),
             style: const TextStyle(fontSize: 16),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            dateOnly(DateTime.parse(harvest['evaluationEndDate'])),
+            dateOnly(harvest.evaluationEndDate),
             style: const TextStyle(fontSize: 16),
           ),
         ),
@@ -258,26 +257,14 @@ Widget _buildHarvest(
   );
 }
 
-Widget _buildEstimates(dynamic estimates) {
-  if (estimates == null) {
-    return const TableCell(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Text(
-          'No hay estimaciones',
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-    );
-  }
-
-  bool hasData = estimates != null && estimates != [];
+Widget _buildEstimates(List<EstimatesModel> estimates) {
+  bool hasData = estimates.isNotEmpty;
   return TableCell(
     child: hasData
         ? ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: estimates!.length ?? 0,
+            itemCount: estimates.length,
             itemBuilder: (context, index) {
               final estimate = estimates[index];
 
@@ -299,7 +286,7 @@ Widget _buildEstimates(dynamic estimates) {
                         const Icon(FlutterIcons.calendar_ant,
                             color: Colors.green),
                         const SizedBox(width: 8),
-                        Text(dateOnly(DateTime.parse(estimate['date']))),
+                        Text(dateOnly(estimate.date)),
                       ],
                     ),
                     const SizedBox(height: 5),
@@ -308,7 +295,7 @@ Widget _buildEstimates(dynamic estimates) {
                       children: [
                         const Icon(FlutterIcons.tree_ent, color: Colors.green),
                         const SizedBox(width: 8),
-                        Text('${estimate['totalFruitsEstimates']} Frutos'),
+                        Text('${estimate.totalFruitsEstimates} Frutos'),
                       ],
                     ),
                     const SizedBox(height: 5),
@@ -318,7 +305,7 @@ Widget _buildEstimates(dynamic estimates) {
                         const Icon(FlutterIcons.boxes_faw5s,
                             color: Colors.green),
                         const SizedBox(width: 8),
-                        Text('${estimate['estimatedProduction']} Kg'),
+                        Text('${estimate.estimatedProduction} Kg'),
                       ],
                     ),
                     const SizedBox(height: 5),
@@ -348,13 +335,13 @@ Widget _buildEstimates(dynamic estimates) {
 }
 
 Widget _buildFinalReport(
-    dynamic finalReport,
-    List<dynamic> estimates,
+    FinalProductionModel finalReport,
+    List<EstimatesModel> estimates,
     String harvestId,
     BuildContext context,
     String farmLotId,
     String farmLotName) {
-  if (finalReport == null || estimates.isEmpty) {
+  if (finalReport.id == "000000000000000000000000") {
     return TableCell(
         child: Column(
       children: [
@@ -399,7 +386,7 @@ Widget _buildFinalReport(
           children: [
             const Icon(FlutterIcons.calendar_ant, color: Colors.green),
             const SizedBox(width: 8),
-            Text(dateOnly(DateTime.parse(finalReport['date']))),
+            Text(dateOnly(finalReport.date)),
           ],
         ),
         const SizedBox(height: 5),
@@ -408,7 +395,7 @@ Widget _buildFinalReport(
           children: [
             const Icon(FlutterIcons.tree_ent, color: Colors.green),
             const SizedBox(width: 8),
-            Text('${finalReport['totalProduction']} Kg'),
+            Text('${finalReport.totalProduction} Kg'),
           ],
         ),
         const SizedBox(height: 5),
@@ -417,7 +404,7 @@ Widget _buildFinalReport(
           children: [
             const Icon(FlutterIcons.earth_ant, color: Colors.green),
             const SizedBox(width: 8),
-            Text('${finalReport['exportMarket']} Kg'),
+            Text('${finalReport.exportMarket} Kg'),
           ],
         ),
         const SizedBox(height: 5),
@@ -429,7 +416,7 @@ Widget _buildFinalReport(
                 context,
                 MaterialPageRoute(
                   builder: (context) => FinalReportScreen(
-                      idEstimates: ids, idFinalProduction: finalReport['id']),
+                      idEstimates: ids, idFinalProduction: finalReport.id),
                 ),
               );
             },

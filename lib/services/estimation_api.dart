@@ -14,11 +14,15 @@ Future<List<EstimatesModel>> getEstimatesHarvest(
   Map<String, dynamic> idsEstimates = {
     "ids": idsEstimatesHarvest,
   };
+  List<EstimatesModel> estimates = [];
 
   final response = await dio.post('$baseUrl/estimates-production/harvest',
       data: idsEstimates);
+      
+  if (response.statusCode != HttpStatus.ok) {
+    return estimates;
+  }
 
-  List<EstimatesModel> estimates = [];
   for (var estimate in response.data['data']) {
     estimates.add(EstimatesModel.fromJson(estimate));
   }

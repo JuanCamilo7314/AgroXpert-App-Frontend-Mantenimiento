@@ -14,9 +14,8 @@ final dio = Dio();
 
 Future<List<HistoricHarvestModel>> getHistoricHarvest(String idFarmLot) async {
   final response = await dio.get('$baseUrl/harvest/historic/$idFarmLot');
-
   dynamic dataInformation = response.data['data'];
-  
+
   if (dataInformation == null) {
     return [];
   }
