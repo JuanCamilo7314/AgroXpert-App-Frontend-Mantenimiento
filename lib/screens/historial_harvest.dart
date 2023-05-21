@@ -86,16 +86,6 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
                               ),
                             ),
                             const GraphHarvestProduction(),
-
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  // Acción que se ejecuta al pulsar el botón
-                                },
-                                child: const Text('Estimar produccion'),
-                              ),
-                            ),
                           ],
                         ),
                       )
@@ -232,7 +222,7 @@ Widget _buildHarvest(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          AddTreeForm(idLot: idFarmLot, harvestIndex: index),
+                          AddTreeForm(idLot: idFarmLot, harvestId: harvest.id),
                     ),
                   );
                 },

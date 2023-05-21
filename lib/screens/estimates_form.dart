@@ -6,12 +6,11 @@ import 'package:flutter/material.dart';
 import '../services/estimation_api.dart';
 
 class AddTreeForm extends StatefulWidget {
-  @override
-  final int harvestIndex;
 
+  final String harvestId;
   final String idLot;
 
-  const AddTreeForm({required this.harvestIndex, required this.idLot});
+  const AddTreeForm({super.key, required this.harvestId, required this.idLot});
 
   @override
   State<AddTreeForm> createState() => _AddTreeFormState();
@@ -39,7 +38,7 @@ class _AddTreeFormState extends State<AddTreeForm> {
   }
 
   void _enviarPeticion() {
-    var response = createEstimation(widget.idLot, widget.harvestIndex, _trees);
+    var response = createEstimation(widget.idLot, widget.harvestId, _trees);
 
     response.then((value) => {
           //Si es verdadero se muestra el mensaje de éxito y vuleve la pantalla anterior

@@ -45,4 +45,9 @@ class TreesAssessed {
       numQuartiles: json['numQuartiles'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "numFruits": numFruits,
+        "numQuartiles": numQuartiles,
+      };
 }
