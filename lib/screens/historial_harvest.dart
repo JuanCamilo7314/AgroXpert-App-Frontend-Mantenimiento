@@ -7,6 +7,7 @@ import 'package:agroxpert/utils/date_convert.dart';
 import 'package:agroxpert/screens/final_report.dart';
 import 'package:agroxpert/widgets/graphs/graph_harvest_production.dart';
 import 'package:agroxpert/screens/create_final_report.dart';
+import 'package:agroxpert/models/historic_harvest_model.dart';
 
 import 'estimates_form.dart';
 import 'estimates_production.dart';
@@ -46,12 +47,13 @@ class _HistoricHarvestState extends State<HistoricHarvest> {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
+            print(snapshot.error);
             return const Text('Error al obtener los datos');
           } else if (snapshot.connectionState == ConnectionState.done) {
             bool hasData = false;
-            List<dynamic> historialHarvest = [];
+            final List<HistoricHarvestModel> historialHarvest= [];
             if (snapshot.data != null && snapshot.data != []) {
-              historialHarvest = snapshot.data as List<dynamic>;
+              final historialHarvest = snapshot.data as List<HistoricHarvestModel>;
               hasData = true;
             }
             return Stack(

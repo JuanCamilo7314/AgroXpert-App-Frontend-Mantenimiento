@@ -12,10 +12,15 @@ import '../models/final_production_model.dart';
 
 final dio = Dio();
 
-Future<dynamic> getHistoricHarvest(String idFarmLot) async {
+Future<List<HistoricHarvestModel>> getHistoricHarvest(String idFarmLot) async {
   final response = await dio.get('$baseUrl/harvest/historic/$idFarmLot');
 
   dynamic dataInformation = response.data['data'];
+  
+  if (dataInformation == null) {
+    return [];
+  }
+
   List<HistoricHarvestModel> harvestInformation = [];
   for (var harvest in dataInformation) {
     HistoricHarvestModel historicHarvest =
@@ -23,8 +28,7 @@ Future<dynamic> getHistoricHarvest(String idFarmLot) async {
         
     harvestInformation.add(historicHarvest);
   }
-  print(harvestInformation);
-  return dataInformation;
+  return harvestInformation;
 }
 
 Future<bool> createHarvest(CreateHarvest harvest) async {
