@@ -41,22 +41,16 @@ Future<List<FarmLotModel>> getLots() async {
   return lots;
 }
 
-Future<bool> createEstimation(
-    String farmLotId, String idHarvest, List<TreesAssessed> treesAssessed) async {
+Future<dynamic> createEstimation(String farmLotId, String idHarvest,
+    List<TreesAssessed> treesAssessed) async {
   Map<String, dynamic> body = {
     "idFarm": farmLotId,
     "idHarvest": idHarvest,
     "treesAssessed": treesAssessed.map((e) => e.toJson()).toList(),
   };
 
-  print(jsonEncode(body));
+  final response =
+      await dio.post('http://127.0.0.1:5000/estimates-production', data: jsonEncode(body));
 
-  final response = await dio.post('$baseUrl/estimates-production',
-      data: jsonEncode(body));
-
-  if (response.statusCode != HttpStatus.ok) {
-    return false;
-  }
-  
-  return true;
+  return response.data;
 }

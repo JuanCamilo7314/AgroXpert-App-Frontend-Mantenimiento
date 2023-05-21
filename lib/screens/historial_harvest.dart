@@ -14,13 +14,6 @@ import 'package:agroxpert/models/historic_harvest_model.dart';
 import 'estimates_form.dart';
 import 'estimates_production.dart';
 
-void _verDetalles(BuildContext context, List<Map<String, dynamic>> datos) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-        builder: (context) => DetallesEstimacion(estimaciones: datos)),
-  );
-}
 
 class HistoricHarvest extends StatefulWidget {
   final String farmLotId;
